@@ -10,13 +10,12 @@ import SwiftUI
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
     var window: NSWindow!
-
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view that provides the window contents.
         let contentView = ContentView()
+            .frame(minWidth: 640, minHeight: 550)
 
         // Create the window and set the content view.
         window = NSWindow(
@@ -28,6 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.setFrameAutosaveName("Main Window")
         window.contentView = NSHostingView(rootView: contentView)
         window.makeKeyAndOrderFront(nil)
+        window.title = "Next Up"
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
