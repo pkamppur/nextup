@@ -38,7 +38,7 @@ class EventService {
 
 private func loadEvents(store: EKEventStore) -> [Day] {
     let calendars: [EKCalendar] = store.calendars(for: .event)
-    let date = Date().add(weeks: 1)
+    let date = Date()
     
     print("Start of week \(formatDate(date.startOfWeek()))")
     print("End of week \(formatDate(date.endOfWeek()))")

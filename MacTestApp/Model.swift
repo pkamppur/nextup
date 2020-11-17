@@ -24,6 +24,7 @@ struct EventCalendar {
 }
 
 struct Event {
+    let id: String
     let calendar: EventCalendar
     let title: String
     let startHour: Int
@@ -33,6 +34,7 @@ struct Event {
 extension Event {
     static func from(_ event: EKEvent) -> Event {
         Event(
+            id: event.eventIdentifier,
             calendar: EventCalendar.from(event.calendar),
             title: event.title,
             startHour: event.startDate.hour(),
@@ -40,6 +42,8 @@ extension Event {
         )
     }
 }
+
+extension Event: Identifiable {}
 
 extension EventCalendar {
     static func from(_ calendar: EKCalendar) -> EventCalendar {

@@ -13,5 +13,15 @@ extension View {
             .frame(width: width, height: height)
             .position(x: x + width / 2, y: y + height / 2)
     }
+
+    func frame(_ frame: CGRect) -> some View {
+        self
+            .frame(
+                x: frame.origin.x,
+                y: frame.origin.y,
+                width: frame.size.width,
+                height: frame.size.height
+            )
+    }
 }
 

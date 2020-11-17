@@ -12,10 +12,10 @@ struct ContentView: View {
     
     var body: some View {
         HStack(spacing: 0) {
-            HourColumn()
+            HourHeaderColumn()
                 .frame(maxWidth: 70)
             ForEach(days) { day in
-                HourStack(events: day.events)
+                DayColumn(events: day.events)
             }
         }
         .background(Color.white)
@@ -23,7 +23,10 @@ struct ContentView: View {
         .onAppear() {
             EventService.instance.events { events in
                 for day in events {
-                    print("Day \(day.date), events: \(day.events)")
+                    print("Day \(day.date)")
+                    for event in day.events {
+                        print("    Events: \(event)")
+                    }
                 }
                 
                 days = events
@@ -33,18 +36,34 @@ struct ContentView: View {
 }
 
 
-struct HourStack: View {
+struct DayColumn: View {
     let events: [Event]
     
     var body: some View {
-        HourStacks() { config in
-            VStack(spacing: 0) {
-                ForEach(config.hours) { hour in
-                    Text("\(hour).00")
-                        .frame(maxWidth: .infinity)
-                        .frame(height: config.hourSize.height)
-                        .background(Color.blue.opacity(0.25))
-                        .border(edges: [.top, .trailing], color: Color.gray)
+        HourlyColumn() { config in
+            ZStack {
+                /*VStack(spacing: 0) {
+                    ForEach(config.hours) { hour in
+                        Text("\(hour).00")
+                            .frame(maxWidth: .infinity)
+                            .frame(height: config.hourSize.height)
+                            .background(Color.blue.opacity(0.25))
+                            .border(edges: [.top, .trailing], color: Color.gray)
+                    }
+                }*/
+                ForEach(events) { event in
+                    let frame = config.frameFor(start: event.startHour, end: event.endHour)
+                    
+                    Color(event.calendar.color).opacity(0.5)
+                        .overlay(
+                            //VStack() {
+                                Text(event.title)
+                            //}
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                        )
+                        .frame(frame)
+                        //.background(Color.red.opacity(0.5))
+                        .border(Color.gray)
                 }
             }
         }
@@ -52,15 +71,19 @@ struct HourStack: View {
 }
 
 
-struct HourColumn: View {
+struct HourHeaderColumn: View {
     var body: some View {
-        HourStacks() { config in
-            ForEach(config.hours) { hour in
-                Text("\(hour).00")
-                    .font(.caption)
-                    .padding(.trailing, 5)
-                    .padding(.top, -3)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+        HourlyColumn() { config in
+            VStack(spacing: 0) {
+                ForEach(config.hours) { hour in
+                    Text("\(hour).00")
+                        .font(.caption)
+                        .padding(.trailing, 5)
+                        .padding(.top, -3)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                        .frame(height: config.hourSize.height)
+                        .background(Color.blue.opacity(0.25))
+                }
             }
         }
     }
@@ -70,9 +93,22 @@ struct HourConfig {
     let hours: Range<Int>
     let hourSize: CGSize
     let areaSize: CGSize
+    
+    func frameFor(start: Int, end: Int) -> CGRect {
+        let frame = CGRect(
+            x: 0,
+            y: hourSize.height * (CGFloat(start - hours.first!) + 0.5),
+            width: hourSize.width,
+            height: hourSize.height * CGFloat(end - start)
+        )
+        
+        print("frame from \(start) to \(end): \(frame)")
+        
+        return frame
+    }
 }
 
-struct HourStacks<Content: View>: View {
+struct HourlyColumn<Content: View>: View {
     private let startHour = 8
     private let endHour = 17
     let content: (HourConfig) -> Content
@@ -89,13 +125,6 @@ struct HourStacks<Content: View>: View {
                         areaSize: CGSize(width: geometry.size.width, height: geometry.size.height)
                     )
                 )
-                Color.red.opacity(0.5)
-                    .frame(
-                        x: 0,
-                        y: geometry.size.height / CGFloat(hours) * (10 - 8 + 0.5),
-                        width: geometry.size.width,
-                        height: geometry.size.height / CGFloat(hours) * 4.5
-                    )
             }
         }
     }
