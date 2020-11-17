@@ -41,7 +41,7 @@ struct DayColumn: View {
     
     var body: some View {
         HourlyColumn() { config in
-            ZStack {
+            //ZStack {
                 /*VStack(spacing: 0) {
                     ForEach(config.hours) { hour in
                         Text("\(hour).00")
@@ -65,7 +65,7 @@ struct DayColumn: View {
                         //.background(Color.red.opacity(0.5))
                         .border(Color.gray)
                 }
-            }
+            //}
         }
     }
 }
@@ -95,16 +95,12 @@ struct HourConfig {
     let areaSize: CGSize
     
     func frameFor(start: Int, end: Int) -> CGRect {
-        let frame = CGRect(
+        CGRect(
             x: 0,
             y: hourSize.height * (CGFloat(start - hours.first!) + 0.5),
             width: hourSize.width,
             height: hourSize.height * CGFloat(end - start)
         )
-        
-        print("frame from \(start) to \(end): \(frame)")
-        
-        return frame
     }
 }
 
@@ -117,7 +113,7 @@ struct HourlyColumn<Content: View>: View {
         let hours = endHour - startHour + 2 // Show one hour even if start==end, plus 1 hour spacing divided above and below
         
         return GeometryReader { geometry in
-            ZStack {
+            //ZStack {
                 content(
                     HourConfig(
                         hours: startHour..<endHour+1,
@@ -125,7 +121,7 @@ struct HourlyColumn<Content: View>: View {
                         areaSize: CGSize(width: geometry.size.width, height: geometry.size.height)
                     )
                 )
-            }
+            //}
         }
     }
 }
