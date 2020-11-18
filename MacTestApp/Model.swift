@@ -35,7 +35,9 @@ struct Event {
 
     let start: Minutes // Minutes from day start
     let end: Minutes
-    
+}
+
+extension Event {
     var startTimeString: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .none
@@ -46,9 +48,7 @@ struct Event {
     var duration: Minutes {
         end - start
     }
-}
-
-extension Event {
+    
     static func from(_ event: EKEvent) -> Event {
         Event(
             id: event.eventIdentifier,

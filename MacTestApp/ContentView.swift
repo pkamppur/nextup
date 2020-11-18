@@ -64,15 +64,20 @@ struct DayColumn: View {
                             HStack(alignment: .top, spacing: 0) {
                                 Color(eventColor)
                                     .frame(width: 2)
-                                if event.duration > 30 {
-                                    Text(event.startDate)
-                                        .foregroundColor(Color(eventColor.darker(by: 0.6)).opacity(0.8))
-                                        .padding(2)
+                                
+                                VStack(alignment: .leading, spacing: 0) {
+                                    if event.duration > 30 {
+                                        Text(event.startTimeString)
+                                            .padding([ .top ], 2)
+                                    }
+                                    
+                                    Text(event.title)
+                                        .bold()
+                                        .padding([ .top ], 0)
                                 }
-                                Text(event.title)
-                                    .bold()
-                                    .foregroundColor(Color(eventColor.darker(by: 0.6)).opacity(0.8))
-                                    .padding(2)
+                                .foregroundColor(Color(eventColor.darker(by: 0.6)).opacity(0.8))
+                                .font(.caption)
+                                .padding([ .leading ], 2)
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         )
