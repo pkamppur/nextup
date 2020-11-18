@@ -23,12 +23,29 @@ struct EventCalendar {
     #endif
 }
 
+typealias Minutes = Int
+
 struct Event {
     let id: String
     let calendar: EventCalendar
     let title: String
-    let startHour: Int
-    let endHour: Int
+    
+    let startDate: Date
+    let endDate: Date
+
+    let start: Minutes // Minutes from day start
+    let end: Minutes
+    
+    var startTimeString: String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+        return formatter.string(from: startDate)
+    }
+    
+    var duration: Minutes {
+        end - start
+    }
 }
 
 extension Event {
@@ -37,8 +54,10 @@ extension Event {
             id: event.eventIdentifier,
             calendar: EventCalendar.from(event.calendar),
             title: event.title,
-            startHour: event.startDate.hour(),
-            endHour: event.endDate.hour()
+            startDate: event.startDate,
+            endDate: event.endDate,
+            start: event.startDate.minutesFromDayStart(),
+            end: event.endDate.minutesFromDayStart()
         )
     }
 }

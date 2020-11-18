@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var days: [Day] = []
+    @State private var days: [Day] = Array(repeating: Day(date: Date(), events: []), count: 7)
     
     var body: some View {
         HStack(spacing: 0) {
@@ -36,36 +36,50 @@ struct ContentView: View {
 }
 
 
+let gridColor = Color(white: 0.89, opacity: 1)
+
+
 struct DayColumn: View {
     let events: [Event]
     
     var body: some View {
         HourlyColumn() { config in
-            //ZStack {
-                /*VStack(spacing: 0) {
+            ZStack {
+                VStack(spacing: 0) {
                     ForEach(config.hours) { hour in
-                        Text("\(hour).00")
+                        Color.init(white: 1, opacity: 0)
                             .frame(maxWidth: .infinity)
                             .frame(height: config.hourSize.height)
-                            .background(Color.blue.opacity(0.25))
-                            .border(edges: [.top, .trailing], color: Color.gray)
+                            .border(edges: [.top, .trailing], color: gridColor)
                     }
-                }*/
+                }
+                
                 ForEach(events) { event in
-                    let frame = config.frameFor(start: event.startHour, end: event.endHour)
+                    let frame = config.frameFor(start: event.start, end: event.end)
+                    let eventColor = event.calendar.color
                     
-                    Color(event.calendar.color).opacity(0.5)
+                    Color(eventColor)
+                        .opacity(0.25)
                         .overlay(
-                            //VStack() {
+                            HStack(alignment: .top, spacing: 0) {
+                                Color(eventColor)
+                                    .frame(width: 2)
+                                if event.duration > 30 {
+                                    Text(event.startDate)
+                                        .foregroundColor(Color(eventColor.darker(by: 0.6)).opacity(0.8))
+                                        .padding(2)
+                                }
                                 Text(event.title)
-                            //}
+                                    .bold()
+                                    .foregroundColor(Color(eventColor.darker(by: 0.6)).opacity(0.8))
+                                    .padding(2)
+                            }
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         )
+                        .cornerRadius(2)
                         .frame(frame)
-                        //.background(Color.red.opacity(0.5))
-                        .border(Color.gray)
                 }
-            //}
+            }
         }
     }
 }
@@ -78,11 +92,11 @@ struct HourHeaderColumn: View {
                 ForEach(config.hours) { hour in
                     Text("\(hour).00")
                         .font(.caption)
+                        .foregroundColor(gridColor)
                         .padding(.trailing, 5)
                         .padding(.top, -3)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                         .frame(height: config.hourSize.height)
-                        .background(Color.blue.opacity(0.25))
                 }
             }
         }
@@ -93,13 +107,14 @@ struct HourConfig {
     let hours: Range<Int>
     let hourSize: CGSize
     let areaSize: CGSize
+    private let hourBoxInset: CGFloat = 2
     
     func frameFor(start: Int, end: Int) -> CGRect {
         CGRect(
             x: 0,
-            y: hourSize.height * (CGFloat(start - hours.first!) + 0.5),
-            width: hourSize.width,
-            height: hourSize.height * CGFloat(end - start)
+            y: hourSize.height * (CGFloat(start) / 60 - CGFloat(hours.first!) + 0.5) + hourBoxInset,
+            width: hourSize.width - hourBoxInset,
+            height: hourSize.height * CGFloat(end - start) / 60 - hourBoxInset
         )
     }
 }

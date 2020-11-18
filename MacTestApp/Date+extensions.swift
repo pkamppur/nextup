@@ -33,4 +33,10 @@ extension Date {
     func hour(using calendar: Calendar = Calendar.current) -> Int {
         calendar.dateComponents([.hour], from: self).hour!
     }
+    
+    func minutesFromDayStart(using calendar: Calendar = Calendar.current) -> Int {
+        let components = calendar.dateComponents([.hour, .minute], from: self)
+        
+        return components.hour! * 60 + components.minute!
+    }
 }
