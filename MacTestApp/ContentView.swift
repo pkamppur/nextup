@@ -7,15 +7,33 @@
 
 import SwiftUI
 
+struct HeaderText: View {
+    let text: String
+    
+    var body: some View {
+        Text(text)
+            .padding([ .top ], 20)
+            .padding([ .bottom ], 10)
+            .font(.subheadline)
+    }
+}
+
 struct ContentView: View {
     @State private var days: [Day] = Array(repeating: Day(date: Date.distantPast, events: []), count: 5)
     
     var body: some View {
         HStack(spacing: 0) {
-            HourHeaderColumn()
-                .frame(maxWidth: 70)
+            VStack(alignment: .trailing, spacing: 0) {
+                HeaderText(text: "W1")
+                HourHeaderColumn()
+            }
+            .frame(maxWidth: 70)
+            
             ForEach(days) { day in
-                DayColumn(isToday: day.date.isToday(), events: day.events)
+                VStack(spacing: 0) {
+                    HeaderText(text: formatDayTitle(day.date))
+                    DayColumn(isToday: day.date.isToday(), events: day.events)
+                }
             }
         }
         .background(Color.white)
@@ -123,7 +141,7 @@ struct HourConfig {
     func frameFor(start: Int, end: Int) -> CGRect {
         CGRect(
             x: 0,
-            y: hourSize.height * (CGFloat(start) / 60 - CGFloat(hours.first!) + 0.5) + hourBoxInset,
+            y: hourSize.height * (CGFloat(start) / 60 - CGFloat(hours.first!)) + hourBoxInset,
             width: hourSize.width - hourBoxInset,
             height: hourSize.height * CGFloat(end - start) / 60 - hourBoxInset
         )
@@ -136,7 +154,7 @@ struct HourlyColumn<Content: View>: View {
     let content: (HourConfig) -> Content
     
     var body: some View {
-        let hours = endHour - startHour + 2 // Show one hour even if start==end, plus 1 hour spacing divided above and below
+        let hours = endHour - startHour + 1
         
         return GeometryReader { geometry in
             content(
@@ -157,4 +175,13 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
             .frame(width: 1000.0, height: 800.0)
     }
+}
+
+
+
+private func formatDayTitle(_ date: Date) -> String {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "ccc d"
+    
+    return formatter.string(from: date)
 }
