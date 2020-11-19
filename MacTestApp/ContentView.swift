@@ -62,7 +62,7 @@ struct DayColumn: View {
                 
                 ForEach(events) { event in
                     let frame = config.frameFor(start: event.start, end: event.end)
-                    let eventColor = event.calendar.color
+                    let eventColor = event.calendar.color.nsColor
                     
                     Color(eventColor)
                         .opacity(0.25)
