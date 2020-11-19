@@ -1,0 +1,612 @@
+[
+    {
+        "date": "2020-11-15T22:00:00Z",
+        "events": [
+            {
+                "endDate": "2020-11-16T10:00:00Z",
+                "id": "56FD8B50-48AC-4EC4-B80F-ACB9CC1DBE07",
+                "startDate": "2020-11-16T06:00:00Z",
+                "title": "Morning 8-12 slot",
+                "calendar": {
+                    "name": "Meetings",
+                    "color": {
+                        "red": 0.7490000128746033,
+                        "alpha": 1,
+                        "blue": 0.8550000190734863,
+                        "green": 0.3409999907016754
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-16T09:45:00Z",
+                "id": "B565827F-ED63-4161-BD8A-4167A59FD97a",
+                "startDate": "2020-11-16T07:45:00Z",
+                "title": "Some Other Event",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-16T09:30:00Z",
+                "id": "B565827F-ED63-4161-BD8A-4167A59FD97C",
+                "startDate": "2020-11-16T08:00:00Z",
+                "title": "Person Lastname",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-16T11:00:00Z",
+                "id": "2AB98A89-8DD9-4DEE-88F3-5365919DA11A",
+                "startDate": "2020-11-16T10:00:00Z",
+                "title": "Order groceries!",
+                "calendar": {
+                    "name": "Family",
+                    "color": {
+                        "red": 1,
+                        "alpha": 1,
+                        "blue": 0,
+                        "green": 0.8002784848213196
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-16T12:30:00Z",
+                "id": "EC5E65F5-197B-48EC-8348-FED80439957E",
+                "startDate": "2020-11-16T11:30:00Z",
+                "title": "Team Building",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-16T14:00:00Z",
+                "id": "C2B9FDA8-37F3-47B7-9C23-57468DA9651D",
+                "startDate": "2020-11-16T13:00:00Z",
+                "title": "TB event EoI",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "date": "2020-11-16T22:00:00Z",
+        "events": [
+            {
+                "endDate": "2020-11-17T08:15:00Z",
+                "id": "D756DDCE-A4E7-4729-9C18-3C22A912DF49",
+                "startDate": "2020-11-17T08:00:00Z",
+                "title": "Facilitation feedback",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-17T10:00:00Z",
+                "id": "C80B23A5-DC90-4CF5-A437-9187E99D6CAE",
+                "startDate": "2020-11-17T09:00:00Z",
+                "title": "Dev Meeting",
+                "calendar": {
+                    "name": "Dev",
+                    "color": {
+                        "red": 0.9786449074745178,
+                        "alpha": 1,
+                        "blue": 0.7503657341003418,
+                        "green": 0.6487449407577515
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-17T11:30:00Z",
+                "id": "57C17F8D-CEC1-4D53-A961-967461A16160",
+                "startDate": "2020-11-17T10:30:00Z",
+                "title": "Dev Meeting",
+                "calendar": {
+                    "name": "Dev",
+                    "color": {
+                        "red": 0.9786449074745178,
+                        "alpha": 1,
+                        "blue": 0.7503657341003418,
+                        "green": 0.6487449407577515
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-17T12:30:00Z",
+                "id": "F8B3E6E3-3179-4FE8-880D-B3A6D1F00BAF",
+                "startDate": "2020-11-17T11:00:00Z",
+                "title": "Webinar: HR & Legal",
+                "calendar": {
+                    "name": "Family",
+                    "color": {
+                        "red": 1,
+                        "alpha": 1,
+                        "blue": 0,
+                        "green": 0.8002784848213196
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-17T13:00:00Z",
+                "id": "8EA757E2-7353-4B4A-9D1D-638E16697F66",
+                "startDate": "2020-11-17T12:45:00Z",
+                "title": "iOS exchange of ideas prep",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-17T14:00:00Z",
+                "id": "831368D6-F831-4356-AC22-2A8839324E09",
+                "startDate": "2020-11-17T13:00:00Z",
+                "title": "iOS exchange of ideas",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "date": "2020-11-17T22:00:00Z",
+        "events": [
+            {
+                "endDate": "2020-11-18T12:45:00Z",
+                "id": "C1E72D45-BCE3-48B1-B368-61539FDE56DF",
+                "startDate": "2020-11-18T08:00:00Z",
+                "title": "Long event",
+                "calendar": {
+                    "name": "Dev",
+                    "color": {
+                        "red": 0.9786449074745178,
+                        "alpha": 1,
+                        "blue": 0.7503657341003418,
+                        "green": 0.6487449407577515
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-18T11:00:00Z",
+                "id": "CD78C326-BCE8-4A03-8202-5CC10B347BCC",
+                "startDate": "2020-11-18T09:00:00Z",
+                "title": "Child event",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-18T11:00:00Z",
+                "id": "405F381C-C8BA-4531-BFCD-A6B35D9A9B86",
+                "startDate": "2020-11-18T10:00:00Z",
+                "title": "Child event 2",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-18T12:10:00Z",
+                "id": "B82DA1CC-F38C-4C61-A990-398A78BC9431",
+                "startDate": "2020-11-18T11:40:00Z",
+                "title": "Test Parent",
+                "calendar": {
+                    "name": "My",
+                    "color": {
+                        "red": 1,
+                        "alpha": 1,
+                        "blue": 0,
+                        "green": 0.5848391056060791
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-18T12:25:00Z",
+                "id": "6F061D75-31F1-4288-B95B-684915E81579",
+                "startDate": "2020-11-18T11:55:00Z",
+                "title": "Test",
+                "calendar": {
+                    "name": "My",
+                    "color": {
+                        "red": 1,
+                        "alpha": 1,
+                        "blue": 0,
+                        "green": 0.5848391056060791
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-18T13:00:00Z",
+                "id": "153EF13E-3147-4DCF-9DC9-B090D4E5F1DC",
+                "startDate": "2020-11-18T12:00:00Z",
+                "title": "Retrospective preparations",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-18T14:00:00Z",
+                "id": "30B1A9CC-1FF2-4E77-A3AF-51B79FCC755F",
+                "startDate": "2020-11-18T13:00:00Z",
+                "title": "♻️ Feedback Meeting",
+                "calendar": {
+                    "name": "Dev",
+                    "color": {
+                        "red": 0.9786449074745178,
+                        "alpha": 1,
+                        "blue": 0.7503657341003418,
+                        "green": 0.6487449407577515
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "date": "2020-11-18T22:00:00Z",
+        "events": [
+            {
+                "endDate": "2020-11-19T08:00:00Z",
+                "id": "D5868727-4DF3-45ED-8F52-DFBEE310FC20",
+                "startDate": "2020-11-19T07:00:00Z",
+                "title": "Facilitation Weekly",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-19T09:00:00Z",
+                "id": "A57DF2D6-7644-40DF-9A8B-39822B02A5E3",
+                "startDate": "2020-11-19T08:00:00Z",
+                "title": "Retrospective preparations",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-19T10:00:00Z",
+                "id": "7859E0E8-F322-4D73-A4F1-4EFC8B1D620E",
+                "startDate": "2020-11-19T09:30:00Z",
+                "title": "Retrospective preparations",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-19T11:15:00Z",
+                "id": "C7810221-B03B-4195-9822-02D1EF08B84F",
+                "startDate": "2020-11-19T09:45:00Z",
+                "title": "Haircut",
+                "calendar": {
+                    "name": "Family",
+                    "color": {
+                        "red": 1,
+                        "alpha": 1,
+                        "blue": 0,
+                        "green": 0.8002784848213196
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-19T11:30:00Z",
+                "id": "9D9AA096-9B8A-40A7-84F7-55B2163525A3",
+                "startDate": "2020-11-19T10:00:00Z",
+                "title": "Retrospective",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-19T11:30:00Z",
+                "id": "9A07559A-4BC9-46AF-83D1-E6CD93EE5028",
+                "startDate": "2020-11-19T10:00:00Z",
+                "title": "Customer Retrospective",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-18T14:45:00Z",
+                "id": "C1E72D45-BCE3-48B1-B368-61539FDE56DF",
+                "startDate": "2020-11-18T12:00:00Z",
+                "title": "Spanning event",
+                "calendar": {
+                    "name": "Dev",
+                    "color": {
+                        "red": 0.9786449074745178,
+                        "alpha": 1,
+                        "blue": 0.7503657341003418,
+                        "green": 0.6487449407577515
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-19T12:30:00Z",
+                "id": "F07FA40B-A4D1-4751-AC28-FC77ADBB8301",
+                "startDate": "2020-11-19T12:15:00Z",
+                "title": "Team Building: 15 min coffee break",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-18T15:00:00Z",
+                "id": "CD78C326-BCE8-4A03-8202-5CC10B347BCC",
+                "startDate": "2020-11-18T14:00:00Z",
+                "title": "Child event",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-18T15:00:00Z",
+                "id": "405F381C-C8BA-4531-BFCD-A6B35D9A9B86",
+                "startDate": "2020-11-18T14:00:00Z",
+                "title": "Child event 2",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            },
+        ]
+    },
+    {
+        "date": "2020-11-19T22:00:00Z",
+        "events": [
+            {
+                "endDate": "2020-11-20T10:00:00Z",
+                "id": "C27676E5-6212-4680-ACF6-742409D75FAD",
+                "startDate": "2020-11-20T06:00:00Z",
+                "title": "Morning 8-12 slot",
+                "calendar": {
+                    "name": "Meetings",
+                    "color": {
+                        "red": 0.7490000128746033,
+                        "alpha": 1,
+                        "blue": 0.8550000190734863,
+                        "green": 0.3409999907016754
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-20T09:30:00Z",
+                "id": "AFD09977-1206-49C1-9523-EA2A79DF708A",
+                "startDate": "2020-11-20T08:30:00Z",
+                "title": "Dev Meeting",
+                "calendar": {
+                    "name": "Dev",
+                    "color": {
+                        "red": 0.9786449074745178,
+                        "alpha": 1,
+                        "blue": 0.7503657341003418,
+                        "green": 0.6487449407577515
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-20T14:00:00Z",
+                "id": "1B3239DD-F11B-4DD6-8844-53147F0EB240",
+                "startDate": "2020-11-20T10:00:00Z",
+                "title": "Afternoon 12-16 slot",
+                "calendar": {
+                    "name": "Meetings",
+                    "color": {
+                        "red": 0.7490000128746033,
+                        "alpha": 1,
+                        "blue": 0.8550000190734863,
+                        "green": 0.3409999907016754
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-20T12:00:00Z",
+                "id": "44911340-9233-4F97-9709-E1C00489410C",
+                "startDate": "2020-11-20T10:00:00Z",
+                "title": "Somebody Elsename",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-20T12:00:00Z",
+                "id": "5342C527-100E-4793-AC93-02476423CB70",
+                "startDate": "2020-11-20T10:00:00Z",
+                "title": "Interview",
+                "calendar": {
+                    "name": "Family",
+                    "color": {
+                        "red": 1,
+                        "alpha": 1,
+                        "blue": 0,
+                        "green": 0.8002784848213196
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-20T11:30:00Z",
+                "id": "4DD9554F-8DDB-481A-AABA-5256E2794DAE",
+                "startDate": "2020-11-20T10:45:00Z",
+                "title": "Lol test",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-20T12:00:00Z",
+                "id": "FE245336-942B-4C7C-A592-BCB3E7A80263",
+                "startDate": "2020-11-20T11:00:00Z",
+                "title": "Dev Meeting",
+                "calendar": {
+                    "name": "Dev",
+                    "color": {
+                        "red": 0.9786449074745178,
+                        "alpha": 1,
+                        "blue": 0.7503657341003418,
+                        "green": 0.6487449407577515
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-20T12:15:00Z",
+                "id": "D57FA2BE-7702-4E8E-8A2D-0C92E93D4829",
+                "startDate": "2020-11-20T12:00:00Z",
+                "title": "Coffee break: Data security",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-20T16:00:00Z",
+                "id": "35939740-CC2F-41ED-97A3-6FA63D72C92E",
+                "startDate": "2020-11-20T15:00:00Z",
+                "title": "Backup",
+                "calendar": {
+                    "name": "user@example.com",
+                    "color": {
+                        "red": 0.6785043478012085,
+                        "alpha": 1,
+                        "blue": 0.9250025749206543,
+                        "green": 0.9025055766105652
+                    }
+                }
+            },
+            {
+                "endDate": "2020-11-20T16:50:00Z",
+                "id": "3F925564-B485-4D37-B0C4-C4A9D555549D",
+                "startDate": "2020-11-20T16:00:00Z",
+                "title": "De-stress Massage",
+                "calendar": {
+                    "name": "Family",
+                    "color": {
+                        "red": 1,
+                        "alpha": 1,
+                        "blue": 0,
+                        "green": 0.8002784848213196
+                    }
+                }
+            }
+        ]
+    }
+]
