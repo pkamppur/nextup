@@ -39,4 +39,8 @@ extension Date {
         
         return components.hour! * 60 + components.minute!
     }
+    
+    func isToday(using calendar: Calendar = Calendar.current) -> Bool {
+        calendar.isDateInToday(self)
+    }
 }

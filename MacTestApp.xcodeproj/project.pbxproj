@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B2B977F25659CB90091A2AC /* View+Conditional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B977E25659CB90091A2AC /* View+Conditional.swift */; };
 		2B55EEB925644E4300B1B90A /* View+Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B55EEB825644E4300B1B90A /* View+Frame.swift */; };
 		2B55EEBE256454ED00B1B90A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B55EEBD256454ED00B1B90A /* Model.swift */; };
 		2B64907725658E25000DF465 /* NSColor+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64907625658E25000DF465 /* NSColor+extensions.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B2B977E25659CB90091A2AC /* View+Conditional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Conditional.swift"; sourceTree = "<group>"; };
 		2B55EEB825644E4300B1B90A /* View+Frame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Frame.swift"; sourceTree = "<group>"; };
 		2B55EEBD256454ED00B1B90A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		2B64907625658E25000DF465 /* NSColor+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+extensions.swift"; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				2BA481442561AF1400236EB3 /* ContentView.swift */,
 				2BF1984525630080001F6F2B /* View+EdgeBorder.swift */,
 				2B55EEB825644E4300B1B90A /* View+Frame.swift */,
+				2B2B977E25659CB90091A2AC /* View+Conditional.swift */,
 				2B55EEBD256454ED00B1B90A /* Model.swift */,
 				2BA481742561AFD800236EB3 /* EventService.swift */,
 				2BA481792561B3FC00236EB3 /* Date+extensions.swift */,
@@ -288,6 +291,7 @@
 				2BA4817A2561B3FC00236EB3 /* Date+extensions.swift in Sources */,
 				2BA481452561AF1400236EB3 /* ContentView.swift in Sources */,
 				2BF1984625630080001F6F2B /* View+EdgeBorder.swift in Sources */,
+				2B2B977F25659CB90091A2AC /* View+Conditional.swift in Sources */,
 				2B55EEB925644E4300B1B90A /* View+Frame.swift in Sources */,
 				2B64907725658E25000DF465 /* NSColor+extensions.swift in Sources */,
 				2BA481432561AF1400236EB3 /* AppDelegate.swift in Sources */,

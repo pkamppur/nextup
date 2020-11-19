@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var days: [Day] = Array(repeating: Day(date: Date(), events: []), count: 7)
+    @State private var days: [Day] = Array(repeating: Day(date: Date.distantPast, events: []), count: 5)
     
     var body: some View {
         HStack(spacing: 0) {
             HourHeaderColumn()
                 .frame(maxWidth: 70)
             ForEach(days) { day in
-                DayColumn(events: day.events)
+                DayColumn(isToday: day.date.isToday(), events: day.events)
             }
         }
         .background(Color.white)
@@ -40,6 +40,7 @@ let gridColor = Color(white: 0.89, opacity: 1)
 
 
 struct DayColumn: View {
+    let isToday: Bool
     let events: [Event]
     
     var body: some View {
@@ -52,6 +53,11 @@ struct DayColumn: View {
                             .frame(height: config.hourSize.height)
                             .border(edges: [.top, .trailing], color: gridColor)
                     }
+                }
+                .if(isToday) {
+                    $0
+                        .border(width: 2, edges: [.leading, .trailing], color: Color.red.opacity(0.5))
+                        .background(Color.red.opacity(0.04))
                 }
                 
                 ForEach(events) { event in
@@ -81,7 +87,7 @@ struct DayColumn: View {
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         )
-                        .cornerRadius(2)
+                        //.cornerRadius(2)
                         .frame(frame)
                 }
             }
@@ -133,15 +139,13 @@ struct HourlyColumn<Content: View>: View {
         let hours = endHour - startHour + 2 // Show one hour even if start==end, plus 1 hour spacing divided above and below
         
         return GeometryReader { geometry in
-            //ZStack {
-                content(
-                    HourConfig(
-                        hours: startHour..<endHour+1,
-                        hourSize: CGSize(width: geometry.size.width, height: geometry.size.height / CGFloat(hours)),
-                        areaSize: CGSize(width: geometry.size.width, height: geometry.size.height)
-                    )
+            content(
+                HourConfig(
+                    hours: startHour..<endHour+1,
+                    hourSize: CGSize(width: geometry.size.width, height: geometry.size.height / CGFloat(hours)),
+                    areaSize: CGSize(width: geometry.size.width, height: geometry.size.height)
                 )
-            //}
+            )
         }
     }
 }
