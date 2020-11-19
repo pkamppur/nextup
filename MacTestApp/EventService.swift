@@ -69,9 +69,11 @@ private func loadEvents(from stores: [EKEventStore]) -> [Day] {
         }
     }.map {
         Day(date: $0.key, events: $0.value)
-    }.sorted { (d1, d2) -> Bool in
+    }
+    .sorted { (d1, d2) -> Bool in
         d1.date.compare(d2.date) == .orderedAscending
-    }.filter { $0.date.isWeekday() }
+    }
+    .filter { $0.date.isWeekday() }
 }
 
 private func loadEvents(from store: EKEventStore, start: Date, end: Date) -> [EKEvent] {
