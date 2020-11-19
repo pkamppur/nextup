@@ -43,4 +43,8 @@ extension Date {
     func isToday(using calendar: Calendar = Calendar.current) -> Bool {
         calendar.isDateInToday(self)
     }
+    
+    func isWeekday(using calendar: Calendar = Calendar.current) -> Bool {
+        !calendar.isDateInWeekend(self)
+    }
 }

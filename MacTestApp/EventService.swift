@@ -12,9 +12,13 @@ class EventService {
     static let instance = EventService()
     
     private let store: EKEventStore
-    
+    private let stores: [EKEventStore]
+
     private init() {
         store = EKEventStore()
+        let delegateStore = EKEventStore(sources: store.delegateSources)
+        
+        stores = [ store, delegateStore ]
     }
     
     func events(callback: @escaping ([Day]) -> Void) {
@@ -22,10 +26,10 @@ class EventService {
             case .notDetermined:
                 store.requestAccess(to: .event) { (granted, error) in
                     print("got access \(granted)")
-                    callback(loadEvents(store: self.store))
+                    callback(loadEvents(from: self.stores))
                 }
             case .authorized:
-                callback(loadEvents(store: store))
+                callback(loadEvents(from: stores))
             case .denied:
                 fallthrough
             case .restricted:
@@ -36,16 +40,16 @@ class EventService {
     }
 }
 
-private func loadEvents(store: EKEventStore) -> [Day] {
-    let calendars: [EKCalendar] = store.calendars(for: .event)
+private func loadEvents(from stores: [EKEventStore]) -> [Day] {
     let date = Date()
-    
-    print("Start of week \(formatDate(date.startOfWeek()))")
-    print("End of week \(formatDate(date.endOfWeek()))")
-    print("Next week start of week \(formatDate(date.startOfWeek().add(weeks: 1).startOfWeek()))")
+    let start = date.startOfWeek()
+    let end = date.endOfWeek()
 
-    let predicate = store.predicateForEvents(withStart: date.startOfWeek(), end: date.endOfWeek(), calendars: calendars)
-    let events = store.events(matching: predicate)
+    print("Start of week \(formatDate(start))")
+    print("End of week \(formatDate(end))")
+    print("Next week start of week \(formatDate(start.add(weeks: 1).startOfWeek()))")
+    
+    let events = stores.flatMap { loadEvents(from: $0, start: start, end: end) }
     
     let groupedEvents = Dictionary(grouping: events) { event in
         event.startDate.dayPart()
@@ -67,7 +71,16 @@ private func loadEvents(store: EKEventStore) -> [Day] {
         Day(date: $0.key, events: $0.value)
     }.sorted { (d1, d2) -> Bool in
         d1.date.compare(d2.date) == .orderedAscending
-    }
+    }.filter { $0.date.isWeekday() }
+}
+
+private func loadEvents(from store: EKEventStore, start: Date, end: Date) -> [EKEvent] {
+    let calendars: [EKCalendar] = store.calendars(for: .event)
+
+    let predicate = store.predicateForEvents(withStart: start, end: end, calendars: calendars)
+    let events = store.events(matching: predicate)
+    
+    return events
 }
 
 private func formatDate(_ date: Date) -> String {
