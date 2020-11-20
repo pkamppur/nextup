@@ -22,6 +22,30 @@ struct ContentView: View {
     @State private var days: [Day] = Array(repeating: Day(date: Date.distantPast, events: []), count: 5)
     
     var body: some View {
+        WeekCalendarView(days: days)
+            .onAppear() {
+                days = sampleEvents()
+                return ()
+                
+                EventService.instance.events { events in
+                    for day in events {
+                        print("Day \(day.date)")
+                        for event in day.events {
+                            print("    Events: \(event)")
+                        }
+                    }
+                    
+                    days = events
+                }
+            }
+    }
+}
+
+
+struct WeekCalendarView: View {
+    let days: [Day]
+    
+    var body: some View {
         HStack(spacing: 0) {
             VStack(alignment: .trailing, spacing: 0) {
                 HeaderText(text: "W1")
@@ -38,26 +62,6 @@ struct ContentView: View {
         }
         .background(Color.white)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        /*.onAppear() {
-            EventService.instance.events { events in
-                for day in events {
-                    print("Day \(day.date)")
-                    for event in day.events {
-                        print("    Events: \(event)")
-                    }
-                }
-                
-                days = events
-            }
-        }*/
-        .onAppear() {
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .iso8601
-            let data = NSDataAsset(name: "events.json")!.data
-            
-            let events = try! decoder.decode([Day].self, from: data)
-            days = events
-        }
     }
 }
 
@@ -113,7 +117,6 @@ struct DayColumn: View {
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         )
-                        //.cornerRadius(2)
                         .frame(frame)
                 }
             }
@@ -180,11 +183,20 @@ struct HourlyColumn<Content: View>: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        WeekCalendarView(days: sampleEvents())
             .frame(width: 1000.0, height: 800.0)
     }
 }
 
+private func sampleEvents() -> [Day] {
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .iso8601
+    let data = NSDataAsset(name: "events.json")!.data
+    
+    let events = try! decoder.decode([Day].self, from: data)
+    
+    return events
+}
 
 
 private func formatDayTitle(_ date: Date) -> String {
