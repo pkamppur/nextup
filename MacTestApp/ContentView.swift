@@ -28,6 +28,15 @@ struct ContentView: View {
                 return ()
                 
                 EventService.instance.events { events in
+                    {
+                        let encoder = JSONEncoder()
+                        encoder.dateEncodingStrategy = .iso8601
+                        
+                        let data = try! encoder.encode(events)
+                        let str = String(data: data, encoding: .utf8)!
+                        print("json: \(str)")
+                    }()
+                    
                     for day in events {
                         print("Day \(day.date)")
                         for event in day.events {
@@ -56,7 +65,7 @@ struct WeekCalendarView: View {
             ForEach(days) { day in
                 VStack(spacing: 0) {
                     HeaderText(text: formatDayTitle(day.date))
-                    DayColumn(isToday: day.date.isToday(), events: day.events)
+                    DayColumn(isToday: day.date.isToday(), events: displayEvents(from: day.events))
                 }
             }
         }
@@ -71,7 +80,7 @@ let gridColor = Color(white: 0.89, opacity: 1)
 
 struct DayColumn: View {
     let isToday: Bool
-    let events: [Event]
+    let events: [DisplayEvent]
     
     var body: some View {
         HourlyColumn() { config in
@@ -91,32 +100,9 @@ struct DayColumn: View {
                 }
                 
                 ForEach(events) { event in
-                    let frame = config.frameFor(start: event.start, end: event.end)
-                    let eventColor = event.calendar.color.nsColor
+                    let frame = config.frameFor(event)
                     
-                    Color(eventColor)
-                        .opacity(0.25)
-                        .overlay(
-                            HStack(alignment: .top, spacing: 0) {
-                                Color(eventColor)
-                                    .frame(width: 2)
-                                
-                                VStack(alignment: .leading, spacing: 0) {
-                                    if event.duration > 30 {
-                                        Text(event.startTimeString)
-                                            .padding([ .top ], 2)
-                                    }
-                                    
-                                    Text(event.title)
-                                        .bold()
-                                        .padding([ .top ], 0)
-                                }
-                                .foregroundColor(Color(eventColor.darker(by: 0.6)).opacity(0.8))
-                                .font(.caption)
-                                .padding([ .leading ], 2)
-                            }
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                        )
+                    EventArea(event: event)
                         .frame(frame)
                 }
             }
@@ -143,18 +129,51 @@ struct HourHeaderColumn: View {
     }
 }
 
+
+struct EventArea: View {
+    let event: DisplayEvent
+    
+    var body: some View {
+        let eventColor = event.color.nsColor
+        
+        return Color(eventColor)
+            .opacity(0.25)
+            .overlay(
+                HStack(alignment: .top, spacing: 0) {
+                    Color(eventColor)
+                        .frame(width: 2)
+                    
+                    VStack(alignment: .leading, spacing: 0) {
+                        if event.duration > 30 {
+                            Text(event.startTimeString)
+                                .padding([ .top ], 2)
+                        }
+                        
+                        Text(event.title)
+                            .bold()
+                            .padding([ .top ], 0)
+                    }
+                    .foregroundColor(Color(eventColor.darker(by: 0.6)).opacity(0.8))
+                    .font(.caption)
+                    .padding([ .leading ], 2)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            )
+    }
+}
+
 struct HourConfig {
     let hours: Range<Int>
     let hourSize: CGSize
     let areaSize: CGSize
     private let hourBoxInset: CGFloat = 2
     
-    func frameFor(start: Int, end: Int) -> CGRect {
-        CGRect(
+    func frameFor(_ event: DisplayEvent) -> CGRect {
+        return CGRect(
             x: 0,
-            y: hourSize.height * (CGFloat(start) / 60 - CGFloat(hours.first!)) + hourBoxInset,
+            y: hourSize.height * (CGFloat(event.start) / 60 - CGFloat(hours.first!)) + hourBoxInset,
             width: hourSize.width - hourBoxInset,
-            height: hourSize.height * CGFloat(end - start) / 60 - hourBoxInset
+            height: hourSize.height * CGFloat(event.end - event.start) / 60 - hourBoxInset
         )
     }
 }
@@ -200,6 +219,10 @@ private func sampleEvents() -> [Day] {
 
 
 private func formatDayTitle(_ date: Date) -> String {
+    if date == Date.distantPast {
+        return ""
+    }
+    
     let formatter = DateFormatter()
     formatter.dateFormat = "ccc d"
     
