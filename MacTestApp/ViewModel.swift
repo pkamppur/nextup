@@ -116,16 +116,27 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
         }
     }
     
-    let parents = events.map { event in
-        (event, events.filter { child in child.id != event.id && event.start <= child.start && child.start < event.end })
+    let childToParentStartMinSeparation: Minutes = 30
+    let eventsAndOverlaps = events.map { event in
+        (event: event,
+         children: events.filter { child in
+            child.id != event.id
+                && event.start + childToParentStartMinSeparation <= child.start
+                && child.start < event.end
+         })
     }
-    .filter {
+    let childrenForEvents = Dictionary(uniqueKeysWithValues: eventsAndOverlaps.map { ($0.event.id, $0.children) })
+    /*.filter {
         !$0.1.isEmpty
-    }
+    }*/
     
-    /*return events.map { event in
-        let isParent = parents.contains { $0.0.id == event.id }
-        let parent = parents.first { $0.1.contains(where: { child in child.id == event.id }) } .map { $0.0 }
+    let parents = events.filter { event in childrenForEvents.first { $0.1.contains { child in child.id == event.id } } == nil}
+    
+    print("parents \(parents.map { $0.title })")
+    
+    return events.map { event in
+        let isParent = parents.contains { $0.id == event.id }
+        //let parent = parents.first { $0.1.contains(where: { child in child.id == event.id }) } .map { $0.0 }
         
         return DisplayEvent(
             id: event.id,
@@ -138,10 +149,10 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
             columnPos: 0,
             columnCount: 1
         )
-    }*/
+    }
 
     
-    print("parents \(parents.map { ($0.0.title, $0.1.map {event in event.title}) })")
+    print("parents \(eventsAndOverlaps.map { ($0.0.title, $0.1.map {event in event.title}) })")
 
     /*for event in tempDisplayEvents {
         if event
