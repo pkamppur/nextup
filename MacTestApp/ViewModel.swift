@@ -104,7 +104,7 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
     
     print("earliestStart \(earliestStart), latestEnd \(latestEnd)")
     print("eventTimeStamps \(eventTimeStamps)")
-    print("groupedEvents \(groupedEvents)")
+    //print("groupedEvents \(groupedEvents)")
 
     for timeStamp in eventTimeStamps {
         print("timeStamp \(timeStamp)")
@@ -116,6 +116,33 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
         }
     }
     
+    let parents = events.map { event in
+        (event, events.filter { child in child.id != event.id && event.start <= child.start && child.start < event.end })
+    }
+    .filter {
+        !$0.1.isEmpty
+    }
+    
+    /*return events.map { event in
+        let isParent = parents.contains { $0.0.id == event.id }
+        let parent = parents.first { $0.1.contains(where: { child in child.id == event.id }) } .map { $0.0 }
+        
+        return DisplayEvent(
+            id: event.id,
+            title: event.title,
+            color: event.calendar.color,
+            startTimeString: event.startTimeString,
+            start: event.start,
+            end: event.end,
+            indentationLevel: isParent ? 0 : 1,
+            columnPos: 0,
+            columnCount: 1
+        )
+    }*/
+
+    
+    print("parents \(parents.map { ($0.0.title, $0.1.map {event in event.title}) })")
+
     /*for event in tempDisplayEvents {
         if event
     }*/
@@ -130,7 +157,6 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
         var column = 0
         let maxColumns = max(events.count, events.reduce(0) { (prev, event) in return max(prev, event.columnCount) })
         for event in events {
-            
             if event.columnCount < maxColumns {
                 event.columnPos = column
                 event.columnCount = maxColumns
