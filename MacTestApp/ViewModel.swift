@@ -118,25 +118,30 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
     
     let childToParentStartMinSeparation: Minutes = 30
     let eventsAndOverlaps = events.map { event in
-        (event: event,
+        (id: event.id,
          children: events.filter { child in
             child.id != event.id
                 && event.start + childToParentStartMinSeparation <= child.start
                 && child.start < event.end
+         },
+         siblings: events.filter { sibling in
+            sibling.id != event.id
+                && event.start <= sibling.start
+                && sibling.start < event.end
          })
     }
-    let childrenForEvents = Dictionary(uniqueKeysWithValues: eventsAndOverlaps.map { ($0.event.id, $0.children) })
+    let childrenForEvents = Dictionary(uniqueKeysWithValues: eventsAndOverlaps.map { ($0.id, $0.children) })
     /*.filter {
         !$0.1.isEmpty
     }*/
     
-    let parents = events.filter { event in childrenForEvents.first { $0.1.contains { child in child.id == event.id } } == nil}
+    //let parents = events.filter { event in childrenForEvents.first { $0.1.contains { child in child.id == event.id } } == nil}
     
     print("parents \(parents.map { $0.title })")
     
     return events.map { event in
         let isParent = parents.contains { $0.id == event.id }
-        //let parent = parents.first { $0.1.contains(where: { child in child.id == event.id }) } .map { $0.0 }
+        let parent = eventsAndOverlaps.first { $0.1.contains(where: { child in child.id == event.id }) } .map { $0.0 }
         
         return DisplayEvent(
             id: event.id,
@@ -152,15 +157,21 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
     }
 
     
-    print("parents \(eventsAndOverlaps.map { ($0.0.title, $0.1.map {event in event.title}) })")
+    //print("parents \(eventsAndOverlaps.map { ($0.0.title, $0.1.map {event in event.title}) })")
 
     /*for event in tempDisplayEvents {
         if event
     }*/
     
-    for timeSlot in groupedEvents.keys.sorted() {
-        let events = groupedEvents[timeSlot]!
-        
+    let eventGroups = eventTimeStamps.map { timeStamp in
+        tempDisplayEvents.filter { event in
+            event.overlaps(timeStamp)
+        }
+    }
+    
+    //for timeSlot in groupedEvents.keys.sorted() {
+    //    let events = groupedEvents[timeSlot]!
+    for events in eventGroups {
         if events.count <= 1 {
             continue
         }
