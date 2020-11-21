@@ -17,7 +17,7 @@ struct DisplayEvent: Identifiable {
     let end: Minutes
     let indentationLevel: Int
     let columnPos: Int
-    let totalColumns: Int
+    let columnCount: Int
     
     var duration: Minutes {
         end - start
@@ -35,7 +35,7 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
             end: $0.end,
             indentationLevel: 0,
             columnPos: 0,
-            totalColumns: 1
+            columnCount: 1
         )
     }
 }
