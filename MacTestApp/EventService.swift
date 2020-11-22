@@ -11,24 +11,24 @@ import EventKit
 class EventService {
     static let instance = EventService()
     
-    private let store: EKEventStore
-    private let stores: [EKEventStore]
+    private let initialStore: EKEventStore
+    private var stores: [EKEventStore]
 
     private init() {
-        store = EKEventStore()
-        let delegateStore = EKEventStore(sources: store.delegateSources)
-        
-        stores = [ store, delegateStore ]
+        initialStore = EKEventStore()
+        stores = []
     }
     
     func events(callback: @escaping ([Day]) -> Void) {
         switch EKEventStore.authorizationStatus(for: .event) {
             case .notDetermined:
-                store.requestAccess(to: .event) { (granted, error) in
+                initialStore.requestAccess(to: .event) { (granted, error) in
                     print("got access \(granted)")
+                    self.createStores()
                     callback(loadEvents(from: self.stores))
                 }
             case .authorized:
+                createStores()
                 callback(loadEvents(from: stores))
             case .denied:
                 fallthrough
@@ -37,6 +37,15 @@ class EventService {
             @unknown default:
                 print("Access denied")
         }
+    }
+    
+    private func createStores() {
+        if !stores.isEmpty {
+            return
+        }
+        
+        let delegateStore = EKEventStore(sources: initialStore.sources + initialStore.delegateSources)
+        stores = [ delegateStore ]
     }
 }
 
