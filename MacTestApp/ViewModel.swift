@@ -302,11 +302,17 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
             print("    columnSiblings \(columnSiblings)")
         }*/
 
-        event.children.first?.indentationLevel += 1
+        //event.children.first?.indentationLevel += 1
         
-        event.indentationLevel += overlapping.count > 0 && overlapping.first!.id != event.id ? 1 : 0
         event.columnPos = columnPos
         event.columnCount = max(1, columnSiblings.count)
+        event.indentationLevel += overlapping.count > 0 && overlapping.first!.id != event.id && columnPos == 0 ? 1 : 0
+        if (event.columnCount == 1 && event.parent != nil)
+            || event.id == event.siblings.sorted(by: { $0.columnPos < $1.columnPos }).first?.id
+            || (event.siblings.count == 0 && event.parent != nil)
+            || event.parent?.children.first?.id == event.id {
+            event.indentationLevel += 1
+        }
     }
     
     for event in tempDisplayEvents {
@@ -327,6 +333,25 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
             event.columnCount = 1
         }
     }
+    
+   /* for event in tempDisplayEvents {
+        print("--- event \(event)")
+        /*for child in event.children {
+            //if child.id == event.children.first?.id || child.siblings.count == 0 {
+            //if child.id == child.siblings.sorted(by: { $0.columnPos < $1.columnPos }).first?.id || child.siblings.count == 0 {
+            print("  child \(child)")
+            print("    sorted siblings \(child.siblings.sorted(by: { $0.columnPos < $1.columnPos }))")
+            if child.columnCount == 1 || child.id == child.siblings.sorted(by: { $0.columnPos < $1.columnPos }).first?.id || child.siblings.count == 0 {
+                child.indentationLevel += 1
+            }
+         }*/
+        if (event.columnCount == 1 && event.parent != nil)
+            || event.id == event.siblings.sorted(by: { $0.columnPos < $1.columnPos }).first?.id
+            || (event.siblings.count == 0 && event.parent != nil)
+            || event.parent?.children.first?.id == event.id {
+            event.indentationLevel += 1
+        }
+    }*/
     
     /*
     for event in tempDisplayEvents {
