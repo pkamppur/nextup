@@ -31,83 +31,6 @@ final class WeakBox<T: AnyObject> {
     }
 }
 
-struct WeakArray<T: AnyObject> {
-    
-}
-
-final class TempDisplayEvent {
-    let title: String
-    let id: String
-    let start: Minutes
-    let end: Minutes
-    
-    var children: [TempDisplayEvent]
-    weak var parent: TempDisplayEvent?
-    private var _siblings: [WeakBox<TempDisplayEvent>]
-
-    var indentationLevel: Int
-    var columnPos: Int
-    var columnCount: Int
-    
-    init(title: String, id: String, start: Minutes, end: Minutes) {
-        self.title = title
-        self.id = id
-        self.start = start
-        self.end = end
-        
-        children = []
-        parent = nil
-        _siblings = []
-        
-        indentationLevel = 0
-        columnPos = 0
-        columnCount = 1
-    }
-    
-    func overlaps(timeStamp: Minutes) -> Bool {
-        start <= timeStamp && timeStamp < end
-    }
-    
-    func addChild(_ child: TempDisplayEvent) {
-        children.append(child)
-        child.parent = self
-    }
-    
-    func addSibling(_ sibling: TempDisplayEvent) {
-        _siblings.append(WeakBox(sibling))
-    }
-    
-    var siblings: [TempDisplayEvent] {
-        _siblings.compactMap { $0.value }
-    }
-    
-    func setSiblings(_ siblings: [TempDisplayEvent]) {
-        _siblings = siblings.map { WeakBox($0) }
-    }
-    
-    func overlaps(event: TempDisplayEvent) -> Bool {
-        (start <= event.start && event.start < end) ||
-            (event.start <= start && start < event.end)
-    }
-}
-
-extension TempDisplayEvent: CustomDebugStringConvertible {
-    var debugDescription: String {
-        title
-    }
-}
-
-extension Event {
-    /*func overlaps(timeStamp: Minutes) -> Bool {
-        start <= timeStamp && timeStamp < end
-    }
-    
-    func overlaps(event: Event) -> Bool {
-        (start <= event.start && event.start < end) ||
-            (event.start <= start && start < event.end)
-    }*/
-}
-
 func displayEvents(from events: [Event]) -> [DisplayEvent] {
     if events.isEmpty {
         return []
@@ -121,23 +44,6 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
             end: $0.endDate.minutesFromDayStart()
         )
     }
-    
-    /*
-     var rawDisplayEvents = events.map {
-         DisplayEvent(
-             id: $0.id,
-             title: $0.title,
-             color: $0.calendar.color,
-             startTimeString: $0.startTimeString,
-             start: $0.start,
-             end: $0.end,
-             indentationLevel: 0,
-             columnPos: 0,
-             columnCount: 1
-         )
-     }
-
-     */
     
     let childToParentStartMinSeparation: Minutes = 30
     let eventsAndOverlaps = Dictionary(uniqueKeysWithValues: tempDisplayEvents.map { event in
@@ -264,5 +170,67 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
             columnPos: temp.columnPos,
             columnCount: temp.columnCount
         )
+    }
+}
+
+private final class TempDisplayEvent {
+    let title: String
+    let id: String
+    let start: Minutes
+    let end: Minutes
+    
+    var children: [TempDisplayEvent]
+    weak var parent: TempDisplayEvent?
+    private var _siblings: [WeakBox<TempDisplayEvent>]
+
+    var indentationLevel: Int
+    var columnPos: Int
+    var columnCount: Int
+    
+    init(title: String, id: String, start: Minutes, end: Minutes) {
+        self.title = title
+        self.id = id
+        self.start = start
+        self.end = end
+        
+        children = []
+        parent = nil
+        _siblings = []
+        
+        indentationLevel = 0
+        columnPos = 0
+        columnCount = 1
+    }
+    
+    func overlaps(timeStamp: Minutes) -> Bool {
+        start <= timeStamp && timeStamp < end
+    }
+    
+    func addChild(_ child: TempDisplayEvent) {
+        children.append(child)
+        child.parent = self
+    }
+    
+    func addSibling(_ sibling: TempDisplayEvent) {
+        _siblings.append(WeakBox(sibling))
+    }
+    
+    var siblings: [TempDisplayEvent] {
+        _siblings.compactMap { $0.value }
+    }
+    
+    func setSiblings(_ siblings: [TempDisplayEvent]) {
+        _siblings = siblings.map { WeakBox($0) }
+    }
+    
+    func overlaps(event: TempDisplayEvent) -> Bool {
+        (start <= event.start && event.start < end) ||
+            (event.start <= start && start < event.end)
+    }
+}
+
+extension TempDisplayEvent: CustomDebugStringConvertible {
+    var debugDescription: String {
+        title
     }
 }
