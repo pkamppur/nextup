@@ -292,6 +292,74 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
         }
     }
     
+    for event in tempDisplayEvents {
+        /*let parentDepth: Int = { initial in
+            var current: TempDisplayEvent? = initial
+            var i = -1
+            while current != nil {
+                current = current?.parent
+                i += 1
+            }
+            return i
+        }(event)*/
+        
+        let siblingIds = Set([event.id] + event.siblings.map { $0.id })
+        let siblingEvents = events.filter { siblingIds.contains($0.id) }
+        let overlappingEvents = siblingEvents.filter { $0.end - 15 <= event.start }
+        let overlappingIds = Set(overlappingEvents.map { $0.id })
+        let trueSiblings = siblingEvents.map { $0.id }.filter { !overlappingIds.contains($0) }
+        let columnPos = trueSiblings.firstIndex(of: event.id) ?? 0
+
+        event.children.first?.indentationLevel += 1
+        
+        //event.indentationLevel += columnPos == 0 ? parentDepth : 0
+        event.indentationLevel += overlappingEvents.count > 0 ? 1 : 0
+        event.columnPos = columnPos
+        event.columnCount = max(1, trueSiblings.count)
+    }
+    for event in tempDisplayEvents {
+        if let parent = event.parent {
+            event.columnPos += parent.columnPos
+            event.columnCount += parent.columnCount - 1
+        }
+    }
+    /*
+    for event in tempDisplayEvents {
+        let parentDepth: Int = { initial in
+            var current: TempDisplayEvent? = initial
+            var i = -1
+            while current != nil {
+                current = current?.parent
+                i += 1
+            }
+            return i
+        }(event)
+        
+        let siblingIds = Set([event.id] + event.siblings.map { $0.id })
+        let siblingEvents = events.filter { siblingIds.contains($0.id) }//.filter { !(event.start - $0.start >= 15 && eventInfos[$0.id]!.siblings.count == 1) }
+        let columnPos = siblingEvents.map { $0.id }.firstIndex(of: event.id) ?? 0
+
+        event.indentationLevel = columnPos == 0 ? parentDepth : 0
+        event.columnPos = columnPos
+        event.columnCount = siblingEvents.count
+    }*/
+    
+    return tempDisplayEvents.map { temp in
+        let event = events.first { $0.id == temp.id }!
+        
+        return DisplayEvent(
+            id: event.id,
+            title: event.title,
+            color: event.calendar.color,
+            startTimeString: event.startTimeString,
+            start: event.start,
+            end: event.end,
+            indentationLevel: temp.indentationLevel,
+            columnPos: temp.columnPos,
+            columnCount: temp.columnCount
+        )
+    }
+    
     //for timeSlot in groupedEvents.keys.sorted() {
     //    let events = groupedEvents[timeSlot]!
     for events in eventGroups {
