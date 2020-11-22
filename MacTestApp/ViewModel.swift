@@ -275,8 +275,9 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
         event.setSiblings(siblings)
     }
     
+    let trueSiblingOverlapThreshold: Minutes = 15
+    
     for event in tempDisplayEvents {
-        let trueSiblingOverlapThreshold: Minutes = 15
         let siblingIds = Set([event.id] + event.siblings.map { $0.id })
         let siblingEvents = tempDisplayEvents.filter { siblingIds.contains($0.id) }
         let overlapping = siblingEvents.filter { $0.end - trueSiblingOverlapThreshold <= event.start }
@@ -284,7 +285,7 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
         let columnPos = trueSiblings.firstIndex { $0.id == event.id } ?? 0
         let columnSiblings = trueSiblings//.filter { event.end - trueSiblingOverlapThreshold <= $0.start || event.start <= $0.start }
 
-        print("event \(event)")
+        /*print("event \(event)")
         if let parent = event.parent {
             print("    parent \(parent)")
         }
@@ -299,7 +300,7 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
         }
         if !columnSiblings.isEmpty {
             print("    columnSiblings \(columnSiblings)")
-        }
+        }*/
 
         event.children.first?.indentationLevel += 1
         
@@ -307,12 +308,26 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
         event.columnPos = columnPos
         event.columnCount = max(1, columnSiblings.count)
     }
+    
     for event in tempDisplayEvents {
         if let parent = event.parent {
             event.columnPos += parent.columnPos
             event.columnCount += parent.columnCount - 1
         }
     }
+    
+    for event in tempDisplayEvents {
+        let overlapping = tempDisplayEvents.filter { $0.id != event.id && $0.overlaps(event: event) && $0.id != event.parent?.id }
+        let hasntGotColumnSiblings = overlapping.allSatisfy { event.end - trueSiblingOverlapThreshold <= $0.start }
+
+        if overlapping.count == 0
+            || (overlapping.count == 1 && overlapping.first!.id == event.parent?.id)
+            || (hasntGotColumnSiblings) {
+            event.columnPos = 0
+            event.columnCount = 1
+        }
+    }
+    
     /*
     for event in tempDisplayEvents {
         let parentDepth: Int = { initial in
