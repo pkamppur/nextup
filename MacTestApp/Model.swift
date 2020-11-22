@@ -75,9 +75,6 @@ struct Event: Codable {
     
     let startDate: Date
     let endDate: Date
-
-    let start: Minutes // Minutes from day start
-    let end: Minutes
 }
 
 extension Event {
@@ -88,19 +85,13 @@ extension Event {
         return formatter.string(from: startDate)
     }
     
-    var duration: Minutes {
-        end - start
-    }
-    
     static func from(_ event: EKEvent) -> Event {
         Event(
             id: event.eventIdentifier,
             calendar: EventCalendar.from(event.calendar),
             title: event.title,
             startDate: event.startDate,
-            endDate: event.endDate,
-            start: event.startDate.minutesFromDayStart(),
-            end: event.endDate.minutesFromDayStart()
+            endDate: event.endDate
         )
     }
 }
