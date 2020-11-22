@@ -239,16 +239,9 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
     }
     
     // Find parents
-    print("*********************")
-    
     for event in tempDisplayEvents {
         let parentIds = eventsAndOverlaps.filter { (_, value) in value.children.contains(event.id) }.map { $0.key }
         let parents = tempDisplayEvents.filter { parentIds.contains($0.id) }
-        
-        print("event \(event)")
-        for parent in parents {
-            print("    parent \(parent)")
-        }
         
         if !parents.isEmpty {
             for parent in parents {
@@ -283,6 +276,14 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
     }
     
     for event in tempDisplayEvents {
+        let trueSiblingOverlapThreshold: Minutes = 15
+        let siblingIds = Set([event.id] + event.siblings.map { $0.id })
+        let siblingEvents = tempDisplayEvents.filter { siblingIds.contains($0.id) }
+        let overlapping = siblingEvents.filter { $0.end - trueSiblingOverlapThreshold <= event.start }
+        let trueSiblings = siblingEvents.filter { sibling in !overlapping.contains { sibling.id == $0.id } }
+        let columnPos = trueSiblings.firstIndex { $0.id == event.id } ?? 0
+        let columnSiblings = trueSiblings//.filter { event.end - trueSiblingOverlapThreshold <= $0.start || event.start <= $0.start }
+
         print("event \(event)")
         if let parent = event.parent {
             print("    parent \(parent)")
@@ -290,32 +291,21 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
         if !event.siblings.isEmpty {
             print("    siblings \(event.siblings)")
         }
-    }
-    
-    for event in tempDisplayEvents {
-        /*let parentDepth: Int = { initial in
-            var current: TempDisplayEvent? = initial
-            var i = -1
-            while current != nil {
-                current = current?.parent
-                i += 1
-            }
-            return i
-        }(event)*/
-        
-        let siblingIds = Set([event.id] + event.siblings.map { $0.id })
-        let siblingEvents = events.filter { siblingIds.contains($0.id) }
-        let overlappingEvents = siblingEvents.filter { $0.end - 15 <= event.start }
-        let overlappingIds = Set(overlappingEvents.map { $0.id })
-        let trueSiblings = siblingEvents.map { $0.id }.filter { !overlappingIds.contains($0) }
-        let columnPos = trueSiblings.firstIndex(of: event.id) ?? 0
+        if !trueSiblings.isEmpty {
+            print("    true siblings \(trueSiblings)")
+        }
+        if !overlapping.isEmpty {
+            print("    overlapping \(overlapping)")
+        }
+        if !columnSiblings.isEmpty {
+            print("    columnSiblings \(columnSiblings)")
+        }
 
         event.children.first?.indentationLevel += 1
         
-        //event.indentationLevel += columnPos == 0 ? parentDepth : 0
-        event.indentationLevel += overlappingEvents.count > 0 ? 1 : 0
+        event.indentationLevel += overlapping.count > 0 && overlapping.first!.id != event.id ? 1 : 0
         event.columnPos = columnPos
-        event.columnCount = max(1, trueSiblings.count)
+        event.columnCount = max(1, columnSiblings.count)
     }
     for event in tempDisplayEvents {
         if let parent = event.parent {
