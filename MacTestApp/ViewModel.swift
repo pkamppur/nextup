@@ -24,25 +24,40 @@ struct DisplayEvent: Identifiable {
     }
 }
 
-class TempDisplayEvent {
+final class WeakBox<T: AnyObject> {
+    weak var value: T?
+    init(_ value: T) {
+        self.value = value
+    }
+}
+
+struct WeakArray<T: AnyObject> {
+    
+}
+
+final class TempDisplayEvent {
+    let title: String
     let id: String
     let start: Minutes
     let end: Minutes
     
     var children: [TempDisplayEvent]
     weak var parent: TempDisplayEvent?
+    private var _siblings: [WeakBox<TempDisplayEvent>]
 
     var indentationLevel: Int
     var columnPos: Int
     var columnCount: Int
     
-    init(id: String, start: Minutes, end: Minutes) {
+    init(title: String, id: String, start: Minutes, end: Minutes) {
+        self.title = title
         self.id = id
         self.start = start
         self.end = end
         
         children = []
         parent = nil
+        _siblings = []
         
         indentationLevel = 0
         columnPos = 0
@@ -51,6 +66,34 @@ class TempDisplayEvent {
     
     func overlaps(timeStamp: Minutes) -> Bool {
         start <= timeStamp && timeStamp < end
+    }
+    
+    func addChild(_ child: TempDisplayEvent) {
+        children.append(child)
+        child.parent = self
+    }
+    
+    func addSibling(_ sibling: TempDisplayEvent) {
+        _siblings.append(WeakBox(sibling))
+    }
+    
+    var siblings: [TempDisplayEvent] {
+        _siblings.compactMap { $0.value }
+    }
+    
+    func setSiblings(_ siblings: [TempDisplayEvent]) {
+        _siblings = siblings.map { WeakBox($0) }
+    }
+    
+    func overlaps(event: TempDisplayEvent) -> Bool {
+        (start <= event.start && event.start < end) ||
+            (event.start <= start && start < event.end)
+    }
+}
+
+extension TempDisplayEvent: CustomDebugStringConvertible {
+    var debugDescription: String {
+        title
     }
 }
 
@@ -71,7 +114,7 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
     }
     
     let tempDisplayEvents = events.map {
-        TempDisplayEvent(id: $0.id, start: $0.start, end: $0.end)
+        TempDisplayEvent(title: $0.title, id: $0.id, start: $0.start, end: $0.end)
     }
     
     /*
@@ -107,7 +150,7 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
     
     
     
-    print("earliestStart \(earliestStart), latestEnd \(latestEnd)")
+    /*print("earliestStart \(earliestStart), latestEnd \(latestEnd)")
     print("eventTimeStamps \(eventTimeStamps)")
     //print("groupedEvents \(groupedEvents)")
 
@@ -119,7 +162,7 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
                 print("    event \(event.title)")
             }
         }
-    }
+    }*/
     
     let childToParentStartMinSeparation: Minutes = 30
     let eventsAndOverlaps = Dictionary(uniqueKeysWithValues: events.map { event in
@@ -137,7 +180,7 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
         (info.id,
          (id: info.id,
           children: info.children,
-          siblings: info.siblings.filter { sibling in !info.children.contains(sibling)})
+          siblings: info.siblings.filter { sibling in !info.children.contains(sibling) })
         )
     })
     
@@ -154,7 +197,7 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
     }
     
     let eventLookup = Dictionary(uniqueKeysWithValues: events.map { ($0.id, $0) })
-    
+    /*
     return events.map { event in
         let eventInfo = eventInfos[event.id]!
         let isParent = eventInfo.parent == nil
@@ -162,12 +205,13 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
         
         print("event \(event.title)")
         print("    parent \(parent?.title ?? "<none>")")
-        print("    siblings \(eventInfo.siblings.map { sibling in eventLookup[sibling]! }.map { $0.title })")
-
-        let siblingIds = Set([event.id] + eventInfo.siblings)
-        let siblingEvents = events.map { $0.id }.filter { siblingIds.contains($0) }
-        let columnPos = siblingEvents.firstIndex(of: event.id) ?? 0
+        print("    siblings \(eventInfo.siblings.map { sibling in eventLookup[sibling]! }.map { $0.title })")
         
+        let siblingIds = Set([event.id] + eventInfo.siblings)
+        let siblingEvents = events.filter { siblingIds.contains($0.id) }.filter { !(event.start - $0.start >= 15 && eventInfos[$0.id]!.siblings.count == 1) }
+        let columnPos = siblingEvents.map { $0.id }.firstIndex(of: event.id) ?? 0
+        print("    siblingEvents \(siblingEvents.map { $0.title })")
+
         return DisplayEvent(
             id: event.id,
             title: event.title,
@@ -177,9 +221,9 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
             end: event.end,
             indentationLevel: isParent ? 0 : 1,
             columnPos: columnPos,
-            columnCount: eventInfo.siblings.count + 1
+            columnCount: siblingEvents.count
         )
-    }
+    }*/
 
     
     //print("parents \(eventsAndOverlaps.map { ($0.0.title, $0.1.map {event in event.title}) })")
@@ -191,6 +235,60 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
     let eventGroups = eventTimeStamps.map { timeStamp in
         tempDisplayEvents.filter { event in
             event.overlaps(timeStamp: timeStamp)
+        }
+    }
+    
+    // Find parents
+    print("*********************")
+    
+    for event in tempDisplayEvents {
+        let parentIds = eventsAndOverlaps.filter { (_, value) in value.children.contains(event.id) }.map { $0.key }
+        let parents = tempDisplayEvents.filter { parentIds.contains($0.id) }
+        
+        print("event \(event)")
+        for parent in parents {
+            print("    parent \(parent)")
+        }
+        
+        if !parents.isEmpty {
+            for parent in parents {
+                if parent.children.isEmpty {
+                    parent.addChild(event)
+                    break
+                }
+            }
+            
+            if event.parent == nil {
+                let parentWithLeastChildren = parents.sorted { $0.children.count < $1.children.count }.first!
+                parentWithLeastChildren.addChild(event)
+            }
+        }
+    }
+    
+    print("-------------------")
+    
+    let parentEvents = tempDisplayEvents.filter { $0.parent == nil }
+    for event in tempDisplayEvents {
+        let potentialSiblings: [TempDisplayEvent]
+        if let parent = event.parent {
+            potentialSiblings = parent.children
+        } else {
+            potentialSiblings = parentEvents
+        }
+        
+        let siblings = potentialSiblings.filter { sibling in
+            sibling.id != event.id && event.overlaps(event: sibling)
+        }
+        event.setSiblings(siblings)
+    }
+    
+    for event in tempDisplayEvents {
+        print("event \(event)")
+        if let parent = event.parent {
+            print("    parent \(parent)")
+        }
+        if !event.siblings.isEmpty {
+            print("    siblings \(event.siblings)")
         }
     }
     
