@@ -175,8 +175,22 @@ struct HourlyColumn<Content: View>: View {
 
 
 
+struct WeekCalendarView_Previews: PreviewProvider {
+    static var previews: some View {
+        WeekCalendarView(days: sampleEvents())
+            .frame(width: 1000.0, height: 800.0)
+    }
+}
 
-
+func sampleEvents() -> [Day] {
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .iso8601
+    let data = NSDataAsset(name: "events.json")!.data
+    
+    let events = try! decoder.decode([Day].self, from: data)
+    
+    return events
+}
 
 private func formatDayTitle(_ date: Date) -> String {
     if date == Date.distantPast {
