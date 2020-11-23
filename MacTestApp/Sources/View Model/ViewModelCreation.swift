@@ -1,5 +1,5 @@
 //
-//  ViewModel.swift
+//  ViewModelCreation.swift
 //  MacTestApp
 //
 //  Created by Petteri Kamppuri on 20.11.2020.
