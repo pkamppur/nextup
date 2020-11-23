@@ -102,10 +102,9 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
         let siblingIds = Set([event.id] + event.siblings.map { $0.id })
         let siblingEvents = tempDisplayEvents.filter { siblingIds.contains($0.id) }
         let overlapping = siblingEvents.filter { $0.end - trueSiblingOverlapThreshold <= event.start }
-        let trueSiblings = siblingEvents.filter { sibling in !overlapping.contains { sibling.id == $0.id } }
-        let columnPos = trueSiblings.firstIndex { $0.id == event.id } ?? 0
-        let columnSiblings = trueSiblings
-
+        let columnSiblings = siblingEvents.filter { sibling in !overlapping.contains { sibling.id == $0.id } }
+        let columnPos = columnSiblings.firstIndex { $0.id == event.id } ?? 0
+        
         print("event \(event)")
         if let parent = event.parent {
             print("    parent \(parent)")
@@ -113,14 +112,11 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
         if !event.siblings.isEmpty {
             print("    siblings \(event.siblings)")
         }
-        if !trueSiblings.isEmpty {
-            print("    true siblings \(trueSiblings)")
+        if !columnSiblings.isEmpty {
+            print("    column siblings \(columnSiblings)")
         }
         if !overlapping.isEmpty {
             print("    overlapping \(overlapping)")
-        }
-        if !columnSiblings.isEmpty {
-            print("    columnSiblings \(columnSiblings)")
         }
 
         //event.children.first?.indentationLevel += 1
