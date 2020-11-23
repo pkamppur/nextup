@@ -20,10 +20,31 @@ class EventService {
     }
     
     func events(forWeekContaining date: Date, callback: @escaping ([Day]) -> Void) {
+        //callback(sampleEvents()); return
         let proceed = {
             self.createStores()
 
             let events = loadEvents(forWeekContaining: date, from: self.stores)
+            
+            /*{
+                let encoder = JSONEncoder()
+                encoder.dateEncodingStrategy = .iso8601
+                
+                let data = try! encoder.encode(events)
+                let str = String(data: data, encoding: .utf8)!
+                print("json: \(str)")
+            }()*/
+            
+            /*for day in events {
+                print("Day \(day.date)")
+                for event in day.events {
+                    print("    Events: \(event)")
+                }
+            }*/
+            
+            callback(events)
+        }
+        
         switch EKEventStore.authorizationStatus(for: .event) {
             case .notDetermined:
                 initialStore.requestAccess(to: .event) { (granted, error) in
@@ -64,13 +85,13 @@ private func loadEvents(forWeekContaining: Date, from stores: [EKEventStore]) ->
         event.startDate.dayPart()
     }
     
-    for (date, events) in groupedEvents {
+    /*for (date, events) in groupedEvents {
         print("Day: \(formatDate(date))")
         
         for event in events {
             print("    Event: \(event)")
         }
-    }
+    }*/
     
     return groupedEvents.mapValues { events in
         events.map { event in
@@ -90,6 +111,8 @@ private func loadEvents(from store: EKEventStore, start: Date, end: Date) -> [EK
 
     let predicate = store.predicateForEvents(withStart: start, end: end, calendars: calendars)
     let events = store.events(matching: predicate)
+    
+    print("**** store \(store), events \(events.count)")
     
     return events
 }
