@@ -164,12 +164,12 @@
 			isa = PBXGroup;
 			children = (
 				2BE5E638256C38B900A12EEC /* Model */,
+				2BE5E651256C394400A12EEC /* EventKit */,
 				2BE5E634256C381900A12EEC /* Extensions */,
 				2BE5E633256C37F300A12EEC /* Mac */,
 				2BA481442561AF1400236EB3 /* ContentView.swift */,
 				2BE839A4256C267400888D3F /* WeekCalendarView.swift */,
 				2BFB0B7A256847EF00FF90DF /* ViewModel.swift */,
-				2BA481742561AFD800236EB3 /* EventService.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -203,6 +203,14 @@
 				2BE5E646256C38F700A12EEC /* EventCalendar.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2BE5E651256C394400A12EEC /* EventKit */ = {
+			isa = PBXGroup;
+			children = (
+				2BA481742561AFD800236EB3 /* EventService.swift */,
+			);
+			path = EventKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
