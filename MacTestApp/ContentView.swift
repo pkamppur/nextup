@@ -8,30 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var days: [Day] = Array(repeating: Day(date: Date.distantPast, events: []), count: 5)
-    
-    var body: some View {
-        WeekCalendarView(days: days)
-            .onAppear() {
-                EventService.instance.events(forWeekContaining: Date()) { events in
-                    days = events
-                }
-            }
-    }
-}
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        WeekCalendarView(days: sampleEvents())
-            .frame(width: 1000.0, height: 800.0)
-    }
-}
+    @State private var thisWeek: [Day] = Array(repeating: Day(date: Date.distantPast, events: []), count: 5)
+    @State private var nextWeek: [Day] = Array(repeating: Day(date: Date.distantPast, events: []), count: 5)
 
-func sampleEvents() -> [Day] {
-    let decoder = JSONDecoder()
-    decoder.dateDecodingStrategy = .iso8601
-    let data = NSDataAsset(name: "events.json")!.data
-    
-    let events = try! decoder.decode([Day].self, from: data)
-    
-    return events
+    var body: some View {
+        VStack {
+            WeekCalendarView(days: thisWeek)
+            WeekCalendarView(days: nextWeek)
+        }
+        .onAppear() {
+            EventService.instance.events(forWeekContaining: Date()) { events in
+                thisWeek = events
+            }
+            
+            EventService.instance.events(forWeekContaining: Date().add(weeks: 1)) { events in
+                nextWeek = events
+            }
+        }
+    }
 }
