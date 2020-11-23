@@ -8,22 +8,6 @@
 import Foundation
 import SwiftUI
 
-struct DisplayEvent: Identifiable {
-    let id: String
-    let title: String
-    let color: CodableColor
-    let startTimeString: String
-    let start: Minutes
-    let end: Minutes
-    let indentationLevel: Int
-    let columnPos: Int
-    let columnCount: Int
-    
-    var duration: Minutes {
-        end - start
-    }
-}
-
 func displayEvents(from events: [Event]) -> [DisplayEvent] {
     if events.isEmpty {
         return []
