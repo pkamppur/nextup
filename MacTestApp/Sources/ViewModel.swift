@@ -24,13 +24,6 @@ struct DisplayEvent: Identifiable {
     }
 }
 
-final class WeakBox<T: AnyObject> {
-    weak var value: T?
-    init(_ value: T) {
-        self.value = value
-    }
-}
-
 func displayEvents(from events: [Event]) -> [DisplayEvent] {
     if events.isEmpty {
         return []
