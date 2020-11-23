@@ -164,6 +164,15 @@
 			path = MacTestAppUITests;
 			sourceTree = "<group>";
 		};
+		2BAB14D6256C3AE40055B4FD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2BA481442561AF1400236EB3 /* ContentView.swift */,
+				2BE839A4256C267400888D3F /* WeekCalendarView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		2BE5E62F256C370E00A12EEC /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,8 +182,7 @@
 				2BE5E634256C381900A12EEC /* Extensions */,
 				2BE5E633256C37F300A12EEC /* Mac */,
 				2BE5E65B256C39CD00A12EEC /* View Model */,
-				2BA481442561AF1400236EB3 /* ContentView.swift */,
-				2BE839A4256C267400888D3F /* WeekCalendarView.swift */,
+				2BAB14D6256C3AE40055B4FD /* Views */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
