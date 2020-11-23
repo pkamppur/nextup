@@ -19,17 +19,19 @@ class EventService {
         stores = []
     }
     
-    func events(callback: @escaping ([Day]) -> Void) {
+    func events(forWeekContaining date: Date, callback: @escaping ([Day]) -> Void) {
+        let proceed = {
+            self.createStores()
+
+            let events = loadEvents(forWeekContaining: date, from: self.stores)
         switch EKEventStore.authorizationStatus(for: .event) {
             case .notDetermined:
                 initialStore.requestAccess(to: .event) { (granted, error) in
                     print("got access \(granted)")
-                    self.createStores()
-                    callback(loadEvents(from: self.stores))
+                    proceed()
                 }
             case .authorized:
-                createStores()
-                callback(loadEvents(from: stores))
+                proceed()
             case .denied:
                 fallthrough
             case .restricted:
@@ -49,14 +51,12 @@ class EventService {
     }
 }
 
-private func loadEvents(from stores: [EKEventStore]) -> [Day] {
-    let date = Date()
-    let start = date.startOfWeek()
-    let end = date.endOfWeek()
+private func loadEvents(forWeekContaining: Date, from stores: [EKEventStore]) -> [Day] {
+    let start = forWeekContaining.startOfWeek()
+    let end = forWeekContaining.endOfWeek()
 
     print("Start of week \(formatDate(start))")
     print("End of week \(formatDate(end))")
-    print("Next week start of week \(formatDate(start.add(weeks: 1).startOfWeek()))")
     
     let events = stores.flatMap { loadEvents(from: $0, start: start, end: end) }
     

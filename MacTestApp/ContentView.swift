@@ -13,7 +13,7 @@ struct ContentView: View {
     var body: some View {
         WeekCalendarView(days: days)
             .onAppear() {
-                EventService.instance.events { events in
+                EventService.instance.events(forWeekContaining: Date()) { events in
                     days = events
                 }
             }
