@@ -16,7 +16,21 @@ struct CodableColor: Codable {
     var green: CGFloat
     var blue: CGFloat
     var alpha: CGFloat
-
+    
+    init(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+        self.red = red
+        self.green = green
+        self.blue = blue
+        self.alpha = alpha
+    }
+    
+    init(white: CGFloat, alpha: CGFloat) {
+        self.red = white
+        self.green = white
+        self.blue = white
+        self.alpha = alpha
+    }
+    
     init(cgColor: CGColor) {
         let rgbColor = cgColor.converted(
             to: CGColorSpace(name: CGColorSpace.sRGB)!,

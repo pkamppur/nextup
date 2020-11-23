@@ -1,0 +1,30 @@
+{
+  "configurations" : [
+    {
+      "id" : "71BA3904-DB6E-444A-B47C-F79EE244EE0C",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:MacTestApp.xcodeproj",
+      "identifier" : "2BA4813E2561AF1400236EB3",
+      "name" : "MacTestApp"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:MacTestApp.xcodeproj",
+        "identifier" : "2BA481532561AF1500236EB3",
+        "name" : "MacTestAppTests"
+      }
+    }
+  ],
+  "version" : 1
+}

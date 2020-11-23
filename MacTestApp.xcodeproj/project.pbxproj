@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B22E3B2256C3E5B003FF205 /* CodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5E639256C38C600A12EEC /* CodableColor.swift */; };
+		2B22E3B6256C3E60003FF205 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5E641256C38E200A12EEC /* Day.swift */; };
+		2B22E3B7256C3E60003FF205 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B55EEBD256454ED00B1B90A /* Event.swift */; };
+		2B22E3B8256C3E60003FF205 /* EventCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5E646256C38F700A12EEC /* EventCalendar.swift */; };
+		2B22E3BC256C3F60003FF205 /* ViewModelCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFB0B7A256847EF00FF90DF /* ViewModelCreation.swift */; };
+		2B22E3C0256C3F9D003FF205 /* DisplayEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5E65C256C39EA00A12EEC /* DisplayEvent.swift */; };
+		2B22E3C4256C3FA8003FF205 /* Date+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA481792561B3FC00236EB3 /* Date+extensions.swift */; };
+		2B22E3C8256C3FB7003FF205 /* WeakBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5E653256C397F00A12EEC /* WeakBox.swift */; };
 		2B2B977F25659CB90091A2AC /* View+Conditional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B977E25659CB90091A2AC /* View+Conditional.swift */; };
 		2B55EEB925644E4300B1B90A /* View+Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B55EEB825644E4300B1B90A /* View+Frame.swift */; };
 		2B55EEBE256454ED00B1B90A /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B55EEBD256454ED00B1B90A /* Event.swift */; };
@@ -20,6 +28,7 @@
 		2BA481642561AF1500236EB3 /* MacTestAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA481632561AF1500236EB3 /* MacTestAppUITests.swift */; };
 		2BA481752561AFD800236EB3 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA481742561AFD800236EB3 /* EventService.swift */; };
 		2BA4817A2561B3FC00236EB3 /* Date+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA481792561B3FC00236EB3 /* Date+extensions.swift */; };
+		2BAB14DB256C3B0D0055B4FD /* ViewModelCreationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB14DA256C3B0D0055B4FD /* ViewModelCreationTests.swift */; };
 		2BE5E63A256C38C600A12EEC /* CodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5E639256C38C600A12EEC /* CodableColor.swift */; };
 		2BE5E642256C38E200A12EEC /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5E641256C38E200A12EEC /* Day.swift */; };
 		2BE5E647256C38F700A12EEC /* EventCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5E646256C38F700A12EEC /* EventCalendar.swift */; };
@@ -69,6 +78,8 @@
 		2BA481652561AF1500236EB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2BA481742561AFD800236EB3 /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		2BA481792561B3FC00236EB3 /* Date+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extensions.swift"; sourceTree = "<group>"; };
+		2BAB14DA256C3B0D0055B4FD /* ViewModelCreationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelCreationTests.swift; sourceTree = "<group>"; };
+		2BAB14DF256C3B520055B4FD /* UnitTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UnitTests.xctestplan; path = MacTestAppTests/UnitTests.xctestplan; sourceTree = SOURCE_ROOT; };
 		2BE5E639256C38C600A12EEC /* CodableColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableColor.swift; sourceTree = "<group>"; };
 		2BE5E641256C38E200A12EEC /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		2BE5E646256C38F700A12EEC /* EventCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCalendar.swift; sourceTree = "<group>"; };
@@ -150,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				2BA481582561AF1500236EB3 /* MacTestAppTests.swift */,
+				2BAB14DF256C3B520055B4FD /* UnitTests.xctestplan */,
 				2BA4815A2561AF1500236EB3 /* Info.plist */,
 			);
 			path = MacTestAppTests;
@@ -239,6 +251,7 @@
 			children = (
 				2BE5E65C256C39EA00A12EEC /* DisplayEvent.swift */,
 				2BFB0B7A256847EF00FF90DF /* ViewModelCreation.swift */,
+				2BAB14DA256C3B0D0055B4FD /* ViewModelCreationTests.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -313,7 +326,6 @@
 					};
 					2BA481532561AF1500236EB3 = {
 						CreatedOnToolsVersion = 12.1;
-						TestTargetID = 2BA4813E2561AF1400236EB3;
 					};
 					2BA4815E2561AF1500236EB3 = {
 						CreatedOnToolsVersion = 12.1;
@@ -397,6 +409,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BA481592561AF1500236EB3 /* MacTestAppTests.swift in Sources */,
+				2BAB14DB256C3B0D0055B4FD /* ViewModelCreationTests.swift in Sources */,
+				2B22E3B6256C3E60003FF205 /* Day.swift in Sources */,
+				2B22E3C4256C3FA8003FF205 /* Date+extensions.swift in Sources */,
+				2B22E3BC256C3F60003FF205 /* ViewModelCreation.swift in Sources */,
+				2B22E3C8256C3FB7003FF205 /* WeakBox.swift in Sources */,
+				2B22E3B2256C3E5B003FF205 /* CodableColor.swift in Sources */,
+				2B22E3C0256C3F9D003FF205 /* DisplayEvent.swift in Sources */,
+				2B22E3B8256C3E60003FF205 /* EventCalendar.swift in Sources */,
+				2B22E3B7256C3E60003FF205 /* Event.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,7 +619,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = MacTestAppTests/Info.plist;
@@ -611,7 +631,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.ios.MacTestAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacTestApp.app/Contents/MacOS/MacTestApp";
 			};
 			name = Debug;
 		};
@@ -619,7 +638,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = MacTestAppTests/Info.plist;
@@ -632,7 +650,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.ios.MacTestAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacTestApp.app/Contents/MacOS/MacTestApp";
 			};
 			name = Release;
 		};
