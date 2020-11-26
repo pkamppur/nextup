@@ -26,7 +26,7 @@ struct WeekCalendarView: View {
             ForEach(days) { day in
                 VStack(spacing: 0) {
                     HeaderText(text: formatDayTitle(day.date))
-                    DayColumn(isToday: day.date.isToday(), events: displayEvents(from: day.events))
+                    DayColumn(date: day.date, events: displayEvents(from: day.events))
                 }
             }
         }
@@ -48,7 +48,7 @@ struct HeaderText: View {
 }
 
 struct DayColumn: View {
-    let isToday: Bool
+    let date: Date
     let events: [DisplayEvent]
     
     var body: some View {
@@ -62,7 +62,7 @@ struct DayColumn: View {
                             .border(edges: [.top, .trailing], color: gridColor)
                     }
                 }
-                .if(isToday) {
+                .if(date.isToday()) {
                     $0
                         .border(width: 2, edges: [.leading, .trailing], color: Color.red.opacity(0.5))
                         .background(Color.red.opacity(0.04))
