@@ -47,4 +47,8 @@ extension Date {
     func isWeekday(using calendar: Calendar = Calendar.current) -> Bool {
         !calendar.isDateInWeekend(self)
     }
+    
+    func weekNumber(using calendar: Calendar = Calendar.current) -> Int {
+        calendar.dateComponents([.weekOfYear], from: self).weekOfYear!
+    }
 }

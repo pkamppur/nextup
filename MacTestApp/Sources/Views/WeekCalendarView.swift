@@ -18,7 +18,7 @@ struct WeekCalendarView: View {
     var body: some View {
         HStack(spacing: 0) {
             VStack(alignment: .trailing, spacing: 0) {
-                HeaderText(text: "W1")
+                HeaderText(text: weekNumber)
                 HourHeaderColumn()
             }
             .frame(maxWidth: 70)
@@ -32,6 +32,14 @@ struct WeekCalendarView: View {
         }
         .background(Color.white)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+    
+    var weekNumber: String {
+        if days.first!.date == Date.distantPast {
+            return ""
+        }
+        
+        return "W\(days.first!.date.weekNumber())"
     }
 }
 
