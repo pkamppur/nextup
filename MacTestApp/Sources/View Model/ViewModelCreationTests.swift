@@ -18,10 +18,10 @@ class ViewModelCreationTests: XCTestCase {
     }
 
     func test___SOMETHING() throws {
-        let spanningEvent = Event.create("1", title: "Spanning", start: "14:00", end: "16:45")
-        let shortOverlappingEvent = Event.create("2", title: "Short", start: "14:15", end: "14:30")
-        let mediumOverlappingEvent = Event.create("3", title: "Med1", start: "16:00", end: "17:00")
-        let mediumOverlappingEvent2 = Event.create("4", title: "Med2", start: "16:00", end: "17:00")
+        let spanningEvent = Event.create("Spanning", start: "14:00", end: "16:45")
+        let shortOverlappingEvent = Event.create("Short", start: "14:15", end: "14:30")
+        let mediumOverlappingEvent = Event.create("Med1", start: "16:00", end: "17:00")
+        let mediumOverlappingEvent2 = Event.create("Med2", start: "16:00", end: "17:00")
         let events = [ spanningEvent, shortOverlappingEvent, mediumOverlappingEvent, mediumOverlappingEvent2 ]
         
         let res = displayEvents(from: events)
@@ -41,8 +41,16 @@ class ViewModelCreationTests: XCTestCase {
     }
 }
 
+fileprivate var eventId = 0
+fileprivate func nextEventId() -> String {
+    eventId += 1
+    
+    return "\(eventId)"
+}
+
 extension Event {
-    static func create(_ id: String, title: String, start: String, end: String) -> Self {
+    static func create(_ title: String, start: String, end: String) -> Self {
+        let id = nextEventId()
         let dateFormatter = ISO8601DateFormatter()
         
         let startTs = "2020-01-01T\(start):00Z"
