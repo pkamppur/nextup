@@ -76,6 +76,9 @@ struct DayColumn: View {
                 }
             }
         }
+        .if(!date.isToday() && date < Date()) {
+            $0.opacity(0.5)
+        }
     }
 }
 
