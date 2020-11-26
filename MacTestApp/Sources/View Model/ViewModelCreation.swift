@@ -141,7 +141,8 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
             end: temp.end,
             indentationLevel: temp.indentationLevel,
             columnPos: temp.columnPos,
-            columnCount: temp.columnCount
+            columnCount: temp.columnCount,
+            maxTitleHeight: min(temp.duration, (temp.children.first?.start ?? Int.max) - temp.start)
         )
     }
 }
@@ -173,6 +174,10 @@ private final class TempDisplayEvent {
         indentationLevel = 0
         columnPos = 0
         columnCount = 1
+    }
+    
+    var duration: Minutes {
+        end - start
     }
     
     func overlaps(timeStamp: Minutes) -> Bool {

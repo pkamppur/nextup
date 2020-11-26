@@ -17,6 +17,7 @@ struct DisplayEvent: Identifiable {
     let indentationLevel: Int
     let columnPos: Int
     let columnCount: Int
+    let maxTitleHeight: Minutes
     
     var duration: Minutes {
         end - start

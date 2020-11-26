@@ -17,6 +17,29 @@ class ViewModelCreationTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    func testShortEventShouldHaveLimitedTitleHeight() throws {
+        let shortEvent = Event.create("Short", start: "14:00", end: "14:30")
+        
+        let res = displayEvents(from: [ shortEvent ])
+        
+        XCTAssertEqual(res[0].title, "Short")
+        XCTAssertEqual(res[0].layout, "0|1-1")
+        XCTAssertEqual(res[0].maxTitleHeight, 30)
+    }
+
+    func testFirstChildLimitsTitleHeight() throws {
+        let parent = Event.create("Parent", start: "14:00", end: "15:00")
+        let child = Event.create("Child", start: "14:30", end: "15:15")
+
+        let res = displayEvents(from: [ parent, child ])
+        
+        XCTAssertEqual(res[0].title, "Parent")
+        XCTAssertEqual(res[0].maxTitleHeight, 30)
+        
+        XCTAssertEqual(res[1].title, "Child")
+        XCTAssertEqual(res[1].maxTitleHeight, 45)
+    }
+
     func test___SOMETHING() throws {
         let spanningEvent = Event.create("Spanning", start: "14:00", end: "16:45")
         let shortOverlappingEvent = Event.create("Short", start: "14:15", end: "14:30")
