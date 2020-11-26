@@ -17,6 +17,19 @@ class ViewModelCreationTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    func testSimpleNonOverlappingEvents() throws {
+        let firstEvent = Event.create("First", start: "14:00", end: "15:00")
+        let secondEvent = Event.create("Second", start: "15:00", end: "16:00")
+        
+        let res = displayEvents(from: [ firstEvent, secondEvent ])
+        
+        XCTAssertEqual(res[0].title, "First")
+        XCTAssertEqual(res[0].layout, "0|1-1")
+        
+        XCTAssertEqual(res[1].title, "Second")
+        XCTAssertEqual(res[1].layout, "0|1-1")
+    }
+
     func testShortEventShouldHaveLimitedTitleHeight() throws {
         let shortEvent = Event.create("Short", start: "14:00", end: "14:30")
         
@@ -38,6 +51,61 @@ class ViewModelCreationTests: XCTestCase {
         
         XCTAssertEqual(res[1].title, "Child")
         XCTAssertEqual(res[1].maxTitleHeight, 45)
+    }
+
+    func testChildIsIndented() throws {
+        let parent = Event.create("Parent", start: "14:00", end: "15:00")
+        let child = Event.create("Child", start: "14:30", end: "15:00")
+
+        let res = displayEvents(from: [ parent, child ])
+        
+        XCTAssertEqual(res[0].title, "Parent")
+        XCTAssertEqual(res[0].layout, "0|1-1")
+        
+        XCTAssertEqual(res[1].title, "Child")
+        XCTAssertEqual(res[1].layout, "1|1-1")
+    }
+
+    func testChildOfChildIsIndentedTwoLevels() throws {
+        let parent = Event.create("Parent", start: "14:00", end: "15:00")
+        let child = Event.create("Child", start: "14:30", end: "15:30")
+        let secondChild = Event.create("Second Child", start: "15:00", end: "15:30")
+
+        let res = displayEvents(from: [ parent, child, secondChild ])
+        
+        XCTAssertEqual(res[0].title, "Parent")
+        XCTAssertEqual(res[0].layout, "0|1-1")
+        
+        XCTAssertEqual(res[1].title, "Child")
+        XCTAssertEqual(res[1].layout, "1|1-1")
+        
+        XCTAssertEqual(res[2].title, "Second Child")
+        XCTAssertEqual(res[2].layout, "2|1-1")
+    }
+
+    func testChildrenAreSpreadToParents() throws {
+        let parent1 = Event.create("Parent1", start: "12:00", end: "16:00")
+        let parent2 = Event.create("Parent2", start: "12:00", end: "14:00")
+        let parent3 = Event.create("Parent3", start: "12:00", end: "14:00")
+        let child1 = Event.create("Child1", start: "12:45", end: "13:45")
+        let child2 = Event.create("Child2", start: "13:00", end: "14:00")
+
+        let res = displayEvents(from: [ parent1, parent2, parent3, child1, child2 ])
+        
+        XCTAssertEqual(res[0].title, "Parent1")
+        XCTAssertEqual(res[0].layout, "0|1-3")
+        
+        XCTAssertEqual(res[1].title, "Parent2")
+        XCTAssertEqual(res[1].layout, "0|2-3")
+        
+        XCTAssertEqual(res[2].title, "Parent3")
+        XCTAssertEqual(res[2].layout, "0|3-3")
+        
+        XCTAssertEqual(res[3].title, "Child1")
+        XCTAssertEqual(res[3].layout, "1|1-3")
+        
+        XCTAssertEqual(res[4].title, "Child2")
+        XCTAssertEqual(res[4].layout, "1|2-3")
     }
 
     func test___SOMETHING() throws {
