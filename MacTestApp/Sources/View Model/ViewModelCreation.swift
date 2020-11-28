@@ -142,7 +142,7 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
             indentationLevel: temp.indentationLevel,
             columnPos: temp.columnPos,
             columnCount: temp.columnCount,
-            maxTitleHeight: min(temp.duration, (temp.children.first?.start ?? Int.max) - temp.start)
+            maxTitleHeight: temp.children.first != nil ? temp.children.first!.start - temp.start : temp.duration
         )
     }
 }

@@ -79,8 +79,9 @@ struct DayColumn: View {
                 ForEach(events) { event in
                     let frame = config.frameFor(event)
                     let titleMaxHeight = CGFloat(event.maxTitleHeight) / 60 * config.hourSize.height
+                    let showStartTime = event.maxTitleHeight >= 45
 
-                    EventArea(event: event, titleMaxHeight: titleMaxHeight)
+                    EventArea(event: event, titleMaxHeight: titleMaxHeight, showStartTime: showStartTime)
                         .frame(frame)
                 }
             }
@@ -114,6 +115,7 @@ struct HourHeaderColumn: View {
 struct EventArea: View {
     let event: DisplayEvent
     let titleMaxHeight: CGFloat
+    let showStartTime: Bool
     
     var body: some View {
         let eventColor = event.color.nsColor
@@ -126,7 +128,7 @@ struct EventArea: View {
                         .frame(width: 2)
                     
                     VStack(alignment: .leading, spacing: 0) {
-                        if event.maxTitleHeight >= 45 {
+                        if showStartTime {
                             Text(event.startTimeString)
                                 .padding([ .top ], 2)
                         }
@@ -138,7 +140,7 @@ struct EventArea: View {
                     .foregroundColor(Color(eventColor.darker(by: 0.6)).opacity(0.8))
                     .font(.caption)
                     .padding([ .leading ], 2)
-                    .frame(maxHeight: titleMaxHeight)
+                    .frame(maxHeight: titleMaxHeight, alignment: .topLeading)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             )
