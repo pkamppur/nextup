@@ -11,6 +11,7 @@ struct DisplayEvent: Identifiable {
     let id: String
     let title: String
     let color: CodableColor
+    let isStriped: Bool
     let startTimeString: String
     let start: Minutes
     let end: Minutes

@@ -197,7 +197,8 @@ extension Event {
             calendar: createCalendar(for: id),
             title: title,
             startDate: dateFormatter.date(from: startTs)!,
-            endDate: dateFormatter.date(from: endTs)!
+            endDate: dateFormatter.date(from: endTs)!,
+            status: .normal
         )
     }
 }

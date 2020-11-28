@@ -131,11 +131,22 @@ func displayEvents(from events: [Event]) -> [DisplayEvent] {
     
     return tempDisplayEvents.map { temp in
         let event = events.first { $0.id == temp.id }!
+        let (isStriped, color) = { () -> (Bool, CodableColor) in
+            switch event.status {
+                case .normal:
+                    return (false, event.calendar.color)
+                case .canceled:
+                    return (false, CodableColor(white: 0.5, alpha: 0.7))
+                case .tentative:
+                    return (true, CodableColor(white: 0.5, alpha: 1))
+            }
+        }()
         
         return DisplayEvent(
             id: event.id,
             title: event.title,
-            color: event.calendar.color,
+            color: color,
+            isStriped: isStriped,
             startTimeString: event.startTimeString,
             start: temp.start,
             end: temp.end,

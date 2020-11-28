@@ -117,10 +117,18 @@ struct EventArea: View {
     let titleMaxHeight: CGFloat
     let showStartTime: Bool
     
+    @ViewBuilder
+    var backgroundView: some View {
+        if event.isStriped {
+            Stripes(config: stripeConfig())
+        } else {
+            Color(event.color.nsColor.lighter(by: 0.7))
+        }
+    }
+    
     var body: some View {
         let eventColor = event.color.nsColor
-        
-        return Color(eventColor.lighter(by: 0.7))
+        return backgroundView
             .opacity(0.7)
             .overlay(
                 HStack(alignment: .top, spacing: 0) {
@@ -145,6 +153,15 @@ struct EventArea: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             )
             .cornerRadius(5)
+    }
+    
+    private func stripeConfig() -> StripeConfig {
+        StripeConfig(
+            foreground: Color(white: 0.875),
+            background: .white,
+            lineWidth: 5,
+            spacing: 1.5
+        )
     }
 }
 
