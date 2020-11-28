@@ -108,7 +108,7 @@ class ViewModelCreationTests: XCTestCase {
         XCTAssertEqual(res[4].layout, "1|2-3")
     }
 
-    func test___SOMETHING() throws {
+    func testEventWithShortChildAndTwoSiblingChildrenLater() throws {
         let spanningEvent = Event.create("Spanning", start: "14:00", end: "16:45")
         let shortOverlappingEvent = Event.create("Short", start: "14:15", end: "14:30")
         let mediumOverlappingEvent = Event.create("Med1", start: "16:00", end: "17:00")
@@ -121,7 +121,7 @@ class ViewModelCreationTests: XCTestCase {
         XCTAssertEqual(res[0].layout, "0|1-2")
         
         XCTAssertEqual(res[1].title, "Short")
-        XCTAssertEqual(res[1].layout, "0|1-2")
+        XCTAssertEqual(res[1].layout, "0|2-2")
         
         XCTAssertEqual(res[2].title, "Med1")
         XCTAssertEqual(res[2].layout, "1|1-2")
@@ -129,6 +129,51 @@ class ViewModelCreationTests: XCTestCase {
         XCTAssertEqual(res[3].title, "Med2")
         XCTAssertEqual(res[3].layout, "0|2-2")
         
+    }
+    
+    func testss() throws {
+        let first = Event.create("First", start: "12:00", end: "13:00")
+        let second = Event.create("Second", start: "12:15", end: "13:15")
+        let sibling = Event.create("Sibling", start: "13:00", end: "14:00")
+        let indentedSibling = Event.create("IndentedSibling", start: "13:00", end: "14:00")
+        let events = [ first, second, sibling, indentedSibling ]
+        
+        let res = displayEvents(from: events)
+        
+        XCTAssertEqual(res[0].title, "First")
+        XCTAssertEqual(res[0].layout, "0|1-2")
+        
+        XCTAssertEqual(res[1].title, "Overlapping")
+        XCTAssertEqual(res[1].layout, "0|2-2")
+        
+        XCTAssertEqual(res[2].title, "Sibling")
+        XCTAssertEqual(res[2].layout, "0|1-2")
+        
+        XCTAssertEqual(res[3].title, "IndentedSibling")
+        XCTAssertEqual(res[3].layout, "1|2-2")
+    }
+    
+    
+    func testShortEventWithOverlappingNextEventWhichHasTwoSiblings() throws {
+        let shortEvent = Event.create("Short", start: "12:30", end: "13:00")
+        let overlappingEvent = Event.create("Overlapping", start: "12:45", end: "13:45")
+        let sibling1 = Event.create("Sibling1", start: "13:00", end: "14:00")
+        let sibling2 = Event.create("Sibling2", start: "13:00", end: "14:00")
+        let events = [ shortEvent, overlappingEvent, sibling1, sibling2 ]
+        
+        let res = displayEvents(from: events)
+        
+        XCTAssertEqual(res[0].title, "Short")
+        XCTAssertEqual(res[0].layout, "0|1-1")
+        
+        XCTAssertEqual(res[1].title, "Overlapping")
+        XCTAssertEqual(res[1].layout, "1|1-3")
+        
+        XCTAssertEqual(res[2].title, "Sibling1")
+        XCTAssertEqual(res[2].layout, "0|2-3")
+        
+        XCTAssertEqual(res[3].title, "Sibling2")
+        XCTAssertEqual(res[3].layout, "0|3-3")
     }
 }
 
