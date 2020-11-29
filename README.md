@@ -21,6 +21,15 @@ This app concentrates on the future. Past isn't important.
 - No viewing event details. This app is for planning what you should be doing next.
 - No editing. Editing is out of scope for this app.
 
+## TODO
+
+- Notifications when an event starts (or when event alerts happen)
+- Add more unit tests
+- Update when calendard change event comes
+- Handle empty days ie. fill week with all days
+- Current time indicator
+- Update current time indicator (every minute in foreground?)
+
 ## Known Issues
 
 - There are failing unit tests which capture event layouts which don't work (yet). I'm sure there are more cases where the layout engine (`displayEvents(from:)`) doesn't do as good job as it could. However, perfect or even great event layout isn't needed for this app to be useful.

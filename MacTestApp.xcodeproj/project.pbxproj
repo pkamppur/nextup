@@ -65,7 +65,6 @@
 		2B64907625658E25000DF465 /* NSColor+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+extensions.swift"; sourceTree = "<group>"; };
 		2B77A3372573AB130095D671 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2B77A33C2573ABE90095D671 /* EventKitParsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventKitParsing.swift; sourceTree = "<group>"; };
-		2B9CC887256A4F4200F3E74F /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		2BA4813F2561AF1400236EB3 /* MacTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BA481422561AF1400236EB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BA481442561AF1400236EB3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -121,7 +120,6 @@
 		2BA481362561AF1400236EB3 = {
 			isa = PBXGroup;
 			children = (
-				2B9CC887256A4F4200F3E74F /* TODO.md */,
 				2B77A3372573AB130095D671 /* README.md */,
 				2BA481412561AF1400236EB3 /* MacTestApp */,
 				2BA481572561AF1500236EB3 /* MacTestAppTests */,
