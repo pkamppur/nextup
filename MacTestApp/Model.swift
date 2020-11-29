@@ -61,14 +61,14 @@ struct CodableColor: Codable {
     #endif
 }
 
-struct EventCalendar {
+struct EventCalendar: Codable {
     let name: String
     let color: CodableColor
 }
 
 typealias Minutes = Int
 
-struct Event {
+struct Event: Codable {
     let id: String
     let calendar: EventCalendar
     let title: String
@@ -116,11 +116,27 @@ extension EventCalendar {
     }
 }
 
-struct Day {
+struct Day: Codable {
     let date: Date
     let events: [Event]
 }
 
 extension Day: Identifiable {
     var id: Date { date }
+}
+
+extension Day {
+    func json() -> Data {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        
+        return try! encoder.encode(self)
+    }
+    
+    static func fromJson(_ data: Data) -> Self {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        
+        return try! decoder.decode(Self.self, from: data)
+    }
 }
