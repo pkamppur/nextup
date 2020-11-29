@@ -17,13 +17,7 @@ struct ContentView: View {
             WeekCalendarView(days: secondWeek)
         }
         .onAppear() {
-            EventService.instance.events(forWeekContaining: firstWeekDate) { events in
-                firstWeek = events
-            }
-            
-            EventService.instance.events(forWeekContaining: secondWeekDate) { events in
-                secondWeek = events
-            }
+            updateData()
         }
     }
     
@@ -35,5 +29,15 @@ struct ContentView: View {
     
     var secondWeekDate: Date {
         firstWeekDate.add(weeks: 1)
+    }
+    
+    private func updateData() {
+        EventService.instance.events(forWeekContaining: firstWeekDate) { events in
+            firstWeek = events
+        }
+        
+        EventService.instance.events(forWeekContaining: secondWeekDate) { events in
+            secondWeek = events
+        }
     }
 }
