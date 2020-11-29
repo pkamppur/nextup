@@ -8,7 +8,7 @@ I created this because I need to know what I should be doing next. I want to see
 
 A lot is missing for this app to be a generally useful and polished app.
 
-<img src="Docs/screenshot.png" alt="screenshot"/>
+<img src="Doc/screenshot.png" alt="screenshot" style="max-width: 840px;"/>
 
 *Note: data is masked in the screenshot above. This can be done by setting `MASK_EVENT_TITLES` to `true` in code.*
 
