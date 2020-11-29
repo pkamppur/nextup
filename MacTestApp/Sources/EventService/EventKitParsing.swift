@@ -22,21 +22,18 @@ extension Event {
                 return .tentative
             }
             
-            var participantStatus: Event.Status = .normal
-            event.attendees?.forEach { participant in
-                if participant.isCurrentUser {
-                    switch participant.participantStatus {
-                        case .pending, .tentative:
-                            participantStatus = .tentative
-                        case .declined:
-                            participantStatus = .canceled
-                        case .accepted, .unknown, .delegated, .completed, .inProcess:
-                            participantStatus = .normal
-                        @unknown default:
-                            participantStatus = .normal
-                    }
+            let participantStatus: Event.Status = event.attendees?.first { $0.isCurrentUser }.map { participant -> Event.Status in
+                switch participant.participantStatus {
+                    case .pending, .tentative:
+                        return .tentative
+                    case .declined:
+                        return .canceled
+                    case .accepted, .unknown, .delegated, .completed, .inProcess:
+                        return .normal
+                    @unknown default:
+                        return .normal
                 }
-            }
+            } ?? .normal
             
             return participantStatus
         }()
