@@ -26,7 +26,7 @@
 		2BA481472561AF1500236EB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BA481462561AF1500236EB3 /* Assets.xcassets */; };
 		2BA4814A2561AF1500236EB3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BA481492561AF1500236EB3 /* Preview Assets.xcassets */; };
 		2BA4814D2561AF1500236EB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BA4814B2561AF1500236EB3 /* Main.storyboard */; };
-		2BA481642561AF1500236EB3 /* MacTestAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA481632561AF1500236EB3 /* MacTestAppUITests.swift */; };
+		2BA481642561AF1500236EB3 /* UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA481632561AF1500236EB3 /* UITests.swift */; };
 		2BA481752561AFD800236EB3 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA481742561AFD800236EB3 /* EventService.swift */; };
 		2BA4817A2561B3FC00236EB3 /* Date+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA481792561B3FC00236EB3 /* Date+extensions.swift */; };
 		2BAB14DB256C3B0D0055B4FD /* ViewModelCreationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB14DA256C3B0D0055B4FD /* ViewModelCreationTests.swift */; };
@@ -76,7 +76,7 @@
 		2BA481542561AF1500236EB3 /* NextUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NextUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BA4815A2561AF1500236EB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2BA4815F2561AF1500236EB3 /* NextUpUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NextUpUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2BA481632561AF1500236EB3 /* MacTestAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacTestAppUITests.swift; sourceTree = "<group>"; };
+		2BA481632561AF1500236EB3 /* UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITests.swift; sourceTree = "<group>"; };
 		2BA481652561AF1500236EB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2BA481742561AFD800236EB3 /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		2BA481792561B3FC00236EB3 /* Date+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extensions.swift"; sourceTree = "<group>"; };
@@ -123,7 +123,7 @@
 				2B77A3372573AB130095D671 /* README.md */,
 				2BA481412561AF1400236EB3 /* MacTestApp */,
 				2BA481572561AF1500236EB3 /* MacTestAppTests */,
-				2BA481622561AF1500236EB3 /* MacTestAppUITests */,
+				2BA481622561AF1500236EB3 /* UI Tests */,
 				2BA481402561AF1400236EB3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -168,13 +168,13 @@
 			path = MacTestAppTests;
 			sourceTree = "<group>";
 		};
-		2BA481622561AF1500236EB3 /* MacTestAppUITests */ = {
+		2BA481622561AF1500236EB3 /* UI Tests */ = {
 			isa = PBXGroup;
 			children = (
-				2BA481632561AF1500236EB3 /* MacTestAppUITests.swift */,
+				2BA481632561AF1500236EB3 /* UITests.swift */,
 				2BA481652561AF1500236EB3 /* Info.plist */,
 			);
-			path = MacTestAppUITests;
+			path = "UI Tests";
 			sourceTree = "<group>";
 		};
 		2BAB14D6256C3AE40055B4FD /* Views */ = {
@@ -429,7 +429,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BA481642561AF1500236EB3 /* MacTestAppUITests.swift in Sources */,
+				2BA481642561AF1500236EB3 /* UITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -663,7 +663,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = MacTestAppUITests/Info.plist;
+				INFOPLIST_FILE = UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -682,7 +682,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = MacTestAppUITests/Info.plist;
+				INFOPLIST_FILE = UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
