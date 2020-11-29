@@ -63,6 +63,7 @@
 		2B55EEBD256454ED00B1B90A /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		2B594835257266DC006866D0 /* Stripes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stripes.swift; sourceTree = "<group>"; };
 		2B64907625658E25000DF465 /* NSColor+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+extensions.swift"; sourceTree = "<group>"; };
+		2B77A3372573AB130095D671 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2B77A33C2573ABE90095D671 /* EventKitParsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventKitParsing.swift; sourceTree = "<group>"; };
 		2B9CC887256A4F4200F3E74F /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		2BA4813F2561AF1400236EB3 /* MacTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				2B9CC887256A4F4200F3E74F /* TODO.md */,
+				2B77A3372573AB130095D671 /* README.md */,
 				2BA481412561AF1400236EB3 /* MacTestApp */,
 				2BA481572561AF1500236EB3 /* MacTestAppTests */,
 				2BA481622561AF1500236EB3 /* MacTestAppUITests */,
