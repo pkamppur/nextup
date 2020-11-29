@@ -38,7 +38,7 @@ struct ContentView: View {
         }
         .background(Color.white)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .onAppear() {
+        /*.onAppear() {
             EventService.instance.events { events in
                 for day in events {
                     print("Day \(day.date)")
@@ -49,6 +49,14 @@ struct ContentView: View {
                 
                 days = events
             }
+        }*/
+        .onAppear() {
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            let data = NSDataAsset(name: "events.json")!.data
+            
+            let events = try! decoder.decode([Day].self, from: data)
+            days = events
         }
     }
 }
