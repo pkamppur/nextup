@@ -8,21 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var thisWeek: [Day] = Array(repeating: Day(date: Date.distantPast, events: []), count: 5)
-    @State private var nextWeek: [Day] = Array(repeating: Day(date: Date.distantPast, events: []), count: 5)
+    @State private var firstWeek: [Day] = Array(repeating: Day(date: Date.distantPast, events: []), count: 5)
+    @State private var secondWeek: [Day] = Array(repeating: Day(date: Date.distantPast, events: []), count: 5)
 
     var body: some View {
         VStack {
-            WeekCalendarView(days: thisWeek)
-            WeekCalendarView(days: nextWeek)
+            WeekCalendarView(days: firstWeek)
+            WeekCalendarView(days: secondWeek)
         }
         .onAppear() {
             EventService.instance.events(forWeekContaining: Date()) { events in
-                thisWeek = events
+                firstWeek = events
             }
             
             EventService.instance.events(forWeekContaining: Date().add(weeks: 1)) { events in
-                nextWeek = events
+                secondWeek = events
             }
         }
     }
