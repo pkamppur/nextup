@@ -7,6 +7,11 @@
 
 import EventKit
 
+/**
+ Allows hiding event contents from screenshots or when demoing app, for example
+ */
+let MASK_EVENT_TITLES = false
+
 extension Event {
     static func from(_ event: EKEvent) -> Event {
         print("*** Event \(event), status \(event.status.rawValue), availability \(event.availability.rawValue)")
@@ -43,7 +48,7 @@ extension Event {
         return Event(
             id: event.eventIdentifier,
             calendar: EventCalendar.from(event.calendar),
-            title: event.title,
+            title: MASK_EVENT_TITLES ? event.title.randomized : event.title,
             startDate: event.startDate,
             endDate: event.endDate,
             status: status
@@ -57,5 +62,14 @@ extension EventCalendar {
             name: calendar.title,
             color: CodableColor(cgColor: calendar.color.cgColor)
         )
+    }
+}
+
+extension String {
+    static let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    
+    var randomized: String {
+        let randomString = String(self.compactMap { $0.isWhitespace ? $0 : String.characters.randomElement()! })
+        return (randomString as NSString).capitalized as String
     }
 }
