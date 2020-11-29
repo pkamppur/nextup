@@ -14,8 +14,6 @@ let MASK_EVENT_TITLES = false
 
 extension Event {
     static func from(_ event: EKEvent) -> Event {
-        print("*** Event \(event), status \(event.status.rawValue), availability \(event.availability.rawValue)")
-        
         let status: Event.Status = {
             if event.status == .canceled {
                 return .canceled
@@ -27,8 +25,6 @@ extension Event {
             var participantStatus: Event.Status = .normal
             event.attendees?.forEach { participant in
                 if participant.isCurrentUser {
-                    print("    **** participant status \(participant.participantStatus.rawValue)")
-                    
                     switch participant.participantStatus {
                         case .pending, .tentative:
                             participantStatus = .tentative
