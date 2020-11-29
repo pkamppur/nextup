@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import EventKit
 
 struct ContentView: View {
     @State private var firstWeek: [Day] = Array(repeating: Day(date: Date.distantPast, events: []), count: 5)
@@ -17,6 +18,9 @@ struct ContentView: View {
             WeekCalendarView(days: secondWeek)
         }
         .onAppear() {
+            updateData()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .EKEventStoreChanged)) { _ in
             updateData()
         }
     }
