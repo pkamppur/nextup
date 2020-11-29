@@ -17,13 +17,23 @@ struct ContentView: View {
             WeekCalendarView(days: secondWeek)
         }
         .onAppear() {
-            EventService.instance.events(forWeekContaining: Date()) { events in
+            EventService.instance.events(forWeekContaining: firstWeekDate) { events in
                 firstWeek = events
             }
             
-            EventService.instance.events(forWeekContaining: Date().add(weeks: 1)) { events in
+            EventService.instance.events(forWeekContaining: secondWeekDate) { events in
                 secondWeek = events
             }
         }
+    }
+    
+    var firstWeekDate: Date {
+        let now = Date()
+        
+        return now.isWeekday() ? now : now.add(weeks: 1)
+    }
+    
+    var secondWeekDate: Date {
+        firstWeekDate.add(weeks: 1)
     }
 }
