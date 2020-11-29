@@ -65,7 +65,7 @@
 		2B64907625658E25000DF465 /* NSColor+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+extensions.swift"; sourceTree = "<group>"; };
 		2B77A3372573AB130095D671 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2B77A33C2573ABE90095D671 /* EventKitParsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventKitParsing.swift; sourceTree = "<group>"; };
-		2BA4813F2561AF1400236EB3 /* MacTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BA4813F2561AF1400236EB3 /* NextUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BA481422561AF1400236EB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BA481442561AF1400236EB3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2BA481462561AF1500236EB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -73,9 +73,9 @@
 		2BA4814C2561AF1500236EB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2BA4814E2561AF1500236EB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2BA4814F2561AF1500236EB3 /* MacTestApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacTestApp.entitlements; sourceTree = "<group>"; };
-		2BA481542561AF1500236EB3 /* MacTestAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacTestAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BA481542561AF1500236EB3 /* NextUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NextUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BA4815A2561AF1500236EB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2BA4815F2561AF1500236EB3 /* MacTestAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacTestAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BA4815F2561AF1500236EB3 /* NextUpUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NextUpUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BA481632561AF1500236EB3 /* MacTestAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacTestAppUITests.swift; sourceTree = "<group>"; };
 		2BA481652561AF1500236EB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2BA481742561AFD800236EB3 /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
@@ -131,9 +131,9 @@
 		2BA481402561AF1400236EB3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2BA4813F2561AF1400236EB3 /* MacTestApp.app */,
-				2BA481542561AF1500236EB3 /* MacTestAppTests.xctest */,
-				2BA4815F2561AF1500236EB3 /* MacTestAppUITests.xctest */,
+				2BA4813F2561AF1400236EB3 /* NextUp.app */,
+				2BA481542561AF1500236EB3 /* NextUpTests.xctest */,
+				2BA4815F2561AF1500236EB3 /* NextUpUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -262,9 +262,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2BA4813E2561AF1400236EB3 /* MacTestApp */ = {
+		2BA4813E2561AF1400236EB3 /* NextUp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2BA481682561AF1500236EB3 /* Build configuration list for PBXNativeTarget "MacTestApp" */;
+			buildConfigurationList = 2BA481682561AF1500236EB3 /* Build configuration list for PBXNativeTarget "NextUp" */;
 			buildPhases = (
 				2BA4813B2561AF1400236EB3 /* Sources */,
 				2BA4813C2561AF1400236EB3 /* Frameworks */,
@@ -274,14 +274,14 @@
 			);
 			dependencies = (
 			);
-			name = MacTestApp;
+			name = NextUp;
 			productName = MacTestApp;
-			productReference = 2BA4813F2561AF1400236EB3 /* MacTestApp.app */;
+			productReference = 2BA4813F2561AF1400236EB3 /* NextUp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2BA481532561AF1500236EB3 /* MacTestAppTests */ = {
+		2BA481532561AF1500236EB3 /* NextUpTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2BA4816B2561AF1500236EB3 /* Build configuration list for PBXNativeTarget "MacTestAppTests" */;
+			buildConfigurationList = 2BA4816B2561AF1500236EB3 /* Build configuration list for PBXNativeTarget "NextUpTests" */;
 			buildPhases = (
 				2BA481502561AF1500236EB3 /* Sources */,
 				2BA481512561AF1500236EB3 /* Frameworks */,
@@ -292,14 +292,14 @@
 			dependencies = (
 				2BA481562561AF1500236EB3 /* PBXTargetDependency */,
 			);
-			name = MacTestAppTests;
+			name = NextUpTests;
 			productName = MacTestAppTests;
-			productReference = 2BA481542561AF1500236EB3 /* MacTestAppTests.xctest */;
+			productReference = 2BA481542561AF1500236EB3 /* NextUpTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		2BA4815E2561AF1500236EB3 /* MacTestAppUITests */ = {
+		2BA4815E2561AF1500236EB3 /* NextUpUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2BA4816E2561AF1500236EB3 /* Build configuration list for PBXNativeTarget "MacTestAppUITests" */;
+			buildConfigurationList = 2BA4816E2561AF1500236EB3 /* Build configuration list for PBXNativeTarget "NextUpUITests" */;
 			buildPhases = (
 				2BA4815B2561AF1500236EB3 /* Sources */,
 				2BA4815C2561AF1500236EB3 /* Frameworks */,
@@ -310,9 +310,9 @@
 			dependencies = (
 				2BA481612561AF1500236EB3 /* PBXTargetDependency */,
 			);
-			name = MacTestAppUITests;
+			name = NextUpUITests;
 			productName = MacTestAppUITests;
-			productReference = 2BA4815F2561AF1500236EB3 /* MacTestAppUITests.xctest */;
+			productReference = 2BA4815F2561AF1500236EB3 /* NextUpUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -336,7 +336,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2BA4813A2561AF1400236EB3 /* Build configuration list for PBXProject "MacTestApp" */;
+			buildConfigurationList = 2BA4813A2561AF1400236EB3 /* Build configuration list for PBXProject "NextUp" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -349,9 +349,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2BA4813E2561AF1400236EB3 /* MacTestApp */,
-				2BA481532561AF1500236EB3 /* MacTestAppTests */,
-				2BA4815E2561AF1500236EB3 /* MacTestAppUITests */,
+				2BA4813E2561AF1400236EB3 /* NextUp */,
+				2BA481532561AF1500236EB3 /* NextUpTests */,
+				2BA4815E2561AF1500236EB3 /* NextUpUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -438,12 +438,12 @@
 /* Begin PBXTargetDependency section */
 		2BA481562561AF1500236EB3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2BA4813E2561AF1400236EB3 /* MacTestApp */;
+			target = 2BA4813E2561AF1400236EB3 /* NextUp */;
 			targetProxy = 2BA481552561AF1500236EB3 /* PBXContainerItemProxy */;
 		};
 		2BA481612561AF1500236EB3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2BA4813E2561AF1400236EB3 /* MacTestApp */;
+			target = 2BA4813E2561AF1400236EB3 /* NextUp */;
 			targetProxy = 2BA481602561AF1500236EB3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -698,7 +698,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2BA4813A2561AF1400236EB3 /* Build configuration list for PBXProject "MacTestApp" */ = {
+		2BA4813A2561AF1400236EB3 /* Build configuration list for PBXProject "NextUp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2BA481662561AF1500236EB3 /* Debug */,
@@ -707,7 +707,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2BA481682561AF1500236EB3 /* Build configuration list for PBXNativeTarget "MacTestApp" */ = {
+		2BA481682561AF1500236EB3 /* Build configuration list for PBXNativeTarget "NextUp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2BA481692561AF1500236EB3 /* Debug */,
@@ -716,7 +716,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2BA4816B2561AF1500236EB3 /* Build configuration list for PBXNativeTarget "MacTestAppTests" */ = {
+		2BA4816B2561AF1500236EB3 /* Build configuration list for PBXNativeTarget "NextUpTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2BA4816C2561AF1500236EB3 /* Debug */,
@@ -725,7 +725,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2BA4816E2561AF1500236EB3 /* Build configuration list for PBXNativeTarget "MacTestAppUITests" */ = {
+		2BA4816E2561AF1500236EB3 /* Build configuration list for PBXNativeTarget "NextUpUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2BA4816F2561AF1500236EB3 /* Debug */,

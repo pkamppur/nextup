@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2BA4813E2561AF1400236EB3"
-               BuildableName = "MacTestApp.app"
-               BlueprintName = "MacTestApp"
-               ReferencedContainer = "container:MacTestApp.xcodeproj">
+               BuildableName = "NextUp.app"
+               BlueprintName = "NextUp"
+               ReferencedContainer = "container:NextUp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -39,9 +39,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2BA481532561AF1500236EB3"
-               BuildableName = "MacTestAppTests.xctest"
-               BlueprintName = "MacTestAppTests"
-               ReferencedContainer = "container:MacTestApp.xcodeproj">
+               BuildableName = "NextUpTests.xctest"
+               BlueprintName = "NextUpTests"
+               ReferencedContainer = "container:NextUp.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -49,9 +49,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2BA4815E2561AF1500236EB3"
-               BuildableName = "MacTestAppUITests.xctest"
-               BlueprintName = "MacTestAppUITests"
-               ReferencedContainer = "container:MacTestApp.xcodeproj">
+               BuildableName = "NextUpUITests.xctest"
+               BlueprintName = "NextUpUITests"
+               ReferencedContainer = "container:NextUp.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2BA4813E2561AF1400236EB3"
-            BuildableName = "MacTestApp.app"
-            BlueprintName = "MacTestApp"
-            ReferencedContainer = "container:MacTestApp.xcodeproj">
+            BuildableName = "NextUp.app"
+            BlueprintName = "NextUp"
+            ReferencedContainer = "container:NextUp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -88,9 +88,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2BA4813E2561AF1400236EB3"
-            BuildableName = "MacTestApp.app"
-            BlueprintName = "MacTestApp"
-            ReferencedContainer = "container:MacTestApp.xcodeproj">
+            BuildableName = "NextUp.app"
+            BlueprintName = "NextUp"
+            ReferencedContainer = "container:NextUp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
