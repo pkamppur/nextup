@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Day: Codable {
+struct Day: Codable, Equatable {
     let date: Date
     let events: [Event]
 }

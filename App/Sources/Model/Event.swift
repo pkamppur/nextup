@@ -9,7 +9,7 @@ import Foundation
 
 typealias Minutes = Int
 
-struct Event: Codable {
+struct Event: Codable, Equatable {
     let id: String
     let calendar: EventCalendar
     let title: String

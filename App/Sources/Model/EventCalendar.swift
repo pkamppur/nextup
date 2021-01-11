@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EventCalendar: Codable {
+struct EventCalendar: Codable, Equatable {
     let name: String
     let color: CodableColor
 }

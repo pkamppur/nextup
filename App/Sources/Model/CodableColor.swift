@@ -11,7 +11,7 @@
     import UIKit
 #endif
 
-struct CodableColor: Codable {
+struct CodableColor: Codable, Equatable {
     var red: CGFloat
     var green: CGFloat
     var blue: CGFloat

@@ -13,6 +13,7 @@ let gridColor = Color(white: 0.89, opacity: 1)
 
 
 struct WeekCalendarView: View {
+    let now: Date
     let days: [Day]
     
     var body: some View {
@@ -26,7 +27,7 @@ struct WeekCalendarView: View {
             ForEach(days) { day in
                 VStack(spacing: 0) {
                     HeaderText(text: formatDayTitle(day.date))
-                    DayColumn(date: day.date, events: displayEvents(from: day.events))
+                    DayColumn(now: now, date: day.date, events: displayEvents(from: day.events))
                 }
             }
         }
@@ -56,6 +57,7 @@ struct HeaderText: View {
 }
 
 struct DayColumn: View {
+    let now: Date
     let date: Date
     let events: [DisplayEvent]
     
@@ -83,10 +85,18 @@ struct DayColumn: View {
 
                     EventArea(event: event, titleMaxHeight: titleMaxHeight, showStartTime: showStartTime)
                         .frame(frame)
+                        .if(date.isToday() && event.end <= now.minutesFromDayStart()) {
+                            $0.opacity(0.25)
+                        }
+                }
+                
+                if date.isToday() {
+                    Color.red.opacity(0.5)
+                        .frame(config.frameFor(time: now, height: 2))
                 }
             }
         }
-        .if(!date.isToday() && date < Date()) {
+        .if(!date.isToday() && date < now) {
             $0.opacity(0.5)
         }
     }
@@ -184,6 +194,15 @@ struct HourConfig {
             height: hourSize.height * CGFloat(event.end - event.start) / 60 - hourBoxInset
         )
     }
+    
+    func frameFor(time: Date, height: CGFloat) -> CGRect {
+        CGRect(
+            x: 0,
+            y: hourSize.height * (CGFloat(time.minutesFromDayStart()) / 60 - CGFloat(hours.first!)) + hourBoxInset,
+            width: areaSize.width,
+            height: height
+        )
+    }
 }
 
 struct HourlyColumn<Content: View>: View {
@@ -210,7 +229,7 @@ struct HourlyColumn<Content: View>: View {
 
 struct WeekCalendarView_Previews: PreviewProvider {
     static var previews: some View {
-        WeekCalendarView(days: sampleEvents())
+        WeekCalendarView(now: Date(), days: sampleEvents())
             .frame(width: 1000.0, height: 800.0)
     }
 }
