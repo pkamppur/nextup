@@ -29,6 +29,8 @@ This app concentrates on the future. Past isn't important.
 - Handle empty days ie. fill week with all days
 - Current time indicator
 - Update current time indicator (every minute in foreground?)
+- If parent is same color/calendar, make child pop out (perhaps darken?)
+- Min height for calendar events so text doesn't get clipped?
 
 ## Known Issues
 
