@@ -209,7 +209,7 @@ struct HourConfig {
 
 struct HourlyColumn<Content: View>: View {
     private let startHour = 8
-    private let endHour = 17
+    private let endHour = 18
     let content: (HourConfig) -> Content
     
     var body: some View {
