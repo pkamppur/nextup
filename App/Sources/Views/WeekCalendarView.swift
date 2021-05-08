@@ -189,6 +189,15 @@ struct HourConfig {
         let x = indent + columnWidth * CGFloat(event.columnPos)
         let width = columnWidth - hourBoxInset - indent
         
+        if event.isAllDay {
+            return CGRect(
+                x: x,
+                y: -hourSize.height + hourBoxInset,
+                width: width,
+                height: hourSize.height - hourBoxInset
+            )
+        }
+        
         return CGRect(
             x: x,
             y: hourSize.height * (CGFloat(event.start) / 60 - CGFloat(hours.first!)) + hourBoxInset,

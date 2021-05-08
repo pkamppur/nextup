@@ -20,6 +20,10 @@ struct DisplayEvent: Identifiable {
     let columnCount: Int
     let maxTitleHeight: Minutes
     
+    var isAllDay: Bool {
+        start == end
+    }
+    
     var duration: Minutes {
         end - start
     }
