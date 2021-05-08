@@ -185,10 +185,12 @@ struct HourConfig {
         let indentationPerLevel: CGFloat = 5
         let indent = CGFloat(event.indentationLevel) * indentationPerLevel
         let columnWidth = hourSize.width / CGFloat(event.columnCount)
+        
+        let x = indent + columnWidth * CGFloat(event.columnPos)
         let width = columnWidth - hourBoxInset - indent
         
         return CGRect(
-            x: indent + columnWidth * CGFloat(event.columnPos),
+            x: x,
             y: hourSize.height * (CGFloat(event.start) / 60 - CGFloat(hours.first!)) + hourBoxInset,
             width: width,
             height: hourSize.height * CGFloat(event.end - event.start) / 60 - hourBoxInset
