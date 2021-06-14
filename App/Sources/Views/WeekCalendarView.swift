@@ -36,11 +36,13 @@ struct WeekCalendarView: View {
     }
     
     var weekNumber: String {
-        if days.first!.date == Date.distantPast {
+        guard let date = days.first?.date else { return "" }
+        
+        if date == Date.distantPast {
             return ""
         }
         
-        return "W\(days.first!.date.weekNumber())"
+        return "W\(date.weekNumber())"
     }
 }
 
