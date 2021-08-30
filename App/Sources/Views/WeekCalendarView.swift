@@ -190,6 +190,7 @@ struct HourConfig {
         
         let x = indent + columnWidth * CGFloat(event.columnPos)
         let width = columnWidth - hourBoxInset - indent
+        let minEventHeight = hourSize.height * 0.33
         
         if event.isAllDay {
             return CGRect(
@@ -204,7 +205,7 @@ struct HourConfig {
             x: x,
             y: hourSize.height * (CGFloat(event.start) / 60 - CGFloat(hours.first!)) + hourBoxInset,
             width: width,
-            height: hourSize.height * CGFloat(event.end - event.start) / 60 - hourBoxInset
+            height: max(minEventHeight, hourSize.height * CGFloat(event.end - event.start) / 60) - hourBoxInset
         )
     }
     
